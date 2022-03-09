@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 
 RootNavigator = () => {
     return (
-        <Stack.Navigator initialRouteName={"Splash"} screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName={"HomeNav"} screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="LoginNav" component={LoginNavigator} />
             <Stack.Screen name="HomeNav" component={HomeNavigator} />

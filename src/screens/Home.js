@@ -1,9 +1,6 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { styles } from '../constants/styles';
+import {Text, View} from 'react-native';
+import {styles} from '../constants/styles';
+import HomeView from '../views/Home/HomeView';
 
-export default Home = () => (
-    <View style={styles.container_Align_Center_All}>
-        <Text>Welcome to Dashboard</Text>
-    </View>
-);
+export default Home = () => <HomeView />;
