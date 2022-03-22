@@ -1,8 +1,8 @@
-import {StyleSheet} from 'react-native';
-import {Colors} from './Colors';
-import {Fontsize} from './Fontsize';
-import {FontWeight} from './FontWeights';
-import {SHeight, SWidth} from './Utls';
+import { StyleSheet } from "react-native";
+import { Colors } from "./Colors";
+import { Fontsize } from "./Fontsize";
+import { FontWeight } from "./FontWeights";
+import { SHeight, SWidth } from "./Utls";
 
 export const iconSize = SHeight(2);
 
@@ -10,11 +10,20 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  headerStyle: {
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: SWidth(5),
+    backgroundColor: Colors.white,
+    elevation: 5,
+    zIndex: 5,
+  },
   container_loader_center_all: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
     backgroundColor: Colors.white_Alpha_loader,
     top: 0,
     left: 0,
@@ -23,26 +32,26 @@ export const styles = StyleSheet.create({
   },
   container_Align_Center_All: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   container_Align_Center_Justify_Space_Evenly: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
   footerContainerStyle: {
-    flexDirection: 'row',
+    flexDirection: "row",
     width: SWidth(100),
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     paddingHorizontal: SWidth(5),
     paddingBottom: SWidth(5),
   },
   FormInputContainer: {
     marginHorizontal: SWidth(2.5),
     marginVertical: SWidth(1.5),
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   text_H1: {
     color: Colors.black,
@@ -95,6 +104,19 @@ export const styles = StyleSheet.create({
     fontSize: Fontsize.normal,
     fontWeight: FontWeight.bold,
   },
+  AppBlueButtonStyle: {
+    backgroundColor: "blue",
+    width: SWidth(30),
+    height: SHeight(5),
+    borderRadius: SWidth(1),
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  AppBlueButtonTextStyle: {
+    color: Colors.white,
+    fontSize: Fontsize.normal,
+    fontWeight: FontWeight.bold,
+  },
   LoginInputView: {
     width: SWidth(90),
     marginHorizontal: SWidth(2.5),
@@ -104,8 +126,8 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.white_Alpha_70,
   },
   TextInputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: SHeight(1.5),
     paddingHorizontal: SHeight(1),
     borderRadius: SWidth(1),
@@ -119,8 +141,8 @@ export const styles = StyleSheet.create({
     marginHorizontal: SWidth(2),
   },
   inputRadius: {
-    textAlign: 'center',
-    backgroundColor: 'red',
+    textAlign: "center",
+    backgroundColor: "red",
     flex: 1,
     marginHorizontal: SWidth(2),
     borderRadius: SWidth(1),
@@ -131,6 +153,6 @@ export const styles = StyleSheet.create({
     marginVertical: SHeight(5),
   },
   OTPInputTextView_Container_Style: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 });
