@@ -6,23 +6,9 @@ import { styles } from "../constants/styles";
 import { SWidth } from "../constants/Utls";
 
 const Header = (props) => {
-  const [showBack, setShowBack] = useState(true);
-  const navigation = useNavigation();
-  useEffect(() => {
-    setShowBack(navigation.canGoBack);
-  });
   return (
     <View style={styles.headerStyle}>
-      {showBack && (
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon
-            name="arrow-left"
-            size={20}
-            style={{ paddingRight: SWidth(1) }}
-          />
-        </TouchableOpacity>
-      )}
-      <Text>{props.title}</Text>
+      <Text style={styles.text_H2}>{props.title}</Text>
     </View>
   );
 };

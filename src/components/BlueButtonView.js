@@ -12,7 +12,9 @@ const BlueButtonView = (props) => {
         props.style,
       ]}
     >
-      <Text style={styles.AppBlueButtonTextStyle}>{props.title}</Text>
+      <Text style={[styles.AppBlueButtonTextStyle, props.textStyle]}>
+        {props.title}
+      </Text>
     </TouchableOpacity>
   );
 };

@@ -88,6 +88,12 @@ export const styles = StyleSheet.create({
     fontSize: Fontsize.title,
     fontWeight: FontWeight.normal,
   },
+  commonBackStyle: {
+    backgroundColor: "#d3d3d3",
+  },
+  commonBackTextStyle: {
+    color:'#000'
+  },
   AppLogoStyle: {
     height: SHeight(20),
     aspectRatio: 1,
@@ -107,7 +113,7 @@ export const styles = StyleSheet.create({
   AppBlueButtonStyle: {
     backgroundColor: "blue",
     width: SWidth(30),
-    height: SHeight(5),
+    height: 30,
     borderRadius: SWidth(1),
     alignItems: "center",
     justifyContent: "center",
@@ -154,5 +160,20 @@ export const styles = StyleSheet.create({
   },
   OTPInputTextView_Container_Style: {
     flexDirection: "row",
+  },
+  modalContentContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: Colors.white_Alpha_loader,
+  },
+  modalContentInnerContainer: {
+    width: SWidth(80),
+    backgroundColor: Colors.white,
+    elevation: 5,
+  },
+  checkBoxContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });

@@ -7,6 +7,8 @@ import Profile from "../screens/Profile";
 import AddStudent from "../screens/AddStudent";
 import { SHeight } from "../constants/Utls";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import WatchVideo from "../screens/WatchVideo";
+import MyLists from "../screens/MytLists";
 
 const TabStack = createBottomTabNavigator();
 
@@ -15,10 +17,11 @@ const Stack = createNativeStackNavigator();
 const HomeNavNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName={"Home"}
+      initialRouteName={"HomeScreen"}
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="HomeScreen" component={Home} />
+      <Stack.Screen name="WatchVideo" component={WatchVideo} />
     </Stack.Navigator>
   );
 };
@@ -42,6 +45,7 @@ HomeNavigator = () => {
         // tabBarStyle:{
         // 	paddingVertical:SHeight(1)
         // },
+        lazy: true,
         tabBarStyle: {
           height: 60,
           paddingVertical: 5,
@@ -70,17 +74,17 @@ HomeNavigator = () => {
     >
       <TabStack.Screen
         name="Home"
-        component={Home}
+        component={HomeNavNavigator}
         options={{ headerShown: false }}
       />
       <TabStack.Screen
         name="Profile"
-        component={Profile}
+        component={MyLists}
         options={{ headerShown: false }}
       />
       <TabStack.Screen
         name="Add Student"
-        component={AddStudent}
+        component={AddStudentNavigator}
         options={{ headerShown: false, lazy: true }}
       />
       <TabStack.Screen

@@ -1,18 +1,23 @@
 import React from "react";
 import {
-  SectionList,
   Text,
   View,
+  SectionList,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { Colors } from "../../constants/Colors";
-import { iconSize, styles } from "../../constants/styles";
-import { SHeight, SWidth } from "../../constants/Utls";
 import BlueButtonView from "../../components/BlueButtonView";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Colors } from "../../constants/Colors";
+import { styles } from "../../constants/styles";
+import { SHeight, SWidth } from "../../constants/Utls";
 
-const HomeView = (props) => {
+const listData = [
+  { title: 1, data: [1, 2, 3] },
+  { title: 2, data: [1, 2] },
+  { title: 3, data: [1, 2, 3, 4, 5] },
+];
+
+const MyListsView = (props) => {
   const renderSectionHeaderComponent = ({ section }) => {
     return (
       <View
@@ -44,30 +49,32 @@ const HomeView = (props) => {
         }}
       >
         <Text>Student-{item}</Text>
-        <BlueButtonView title={"Subscribe"} />
-        <TouchableOpacity onPress={() => props.onPlay()}>
-          <Icon name="play-box" size={SHeight(5)} />
+        <TouchableOpacity>
+          <Text
+            style={{ textDecorationLine: "underline", color: Colors.fbBlue }}
+          >
+            Show detail
+          </Text>
         </TouchableOpacity>
       </View>
     );
   };
-
   return (
     <View style={[styles.container]}>
       <View
         style={{
-          alignItems: "flex-end",
+          alignItems: "flex-start",
           padding: SWidth(2.5),
         }}
       >
-        <BlueButtonView onPressProp={props.onAddClick} title={"ADD"} />
+        <BlueButtonView title={"BACK"} />
       </View>
       <SectionList
         contentContainerStyle={{
           paddingHorizontal: SWidth(2.5),
           paddingVertical: SHeight(1),
         }}
-        sections={props.listData || []}
+        sections={listData}
         renderSectionHeader={renderSectionHeaderComponent}
         stickySectionHeadersEnabled
         renderItem={renderItemComponent}
@@ -76,4 +83,4 @@ const HomeView = (props) => {
   );
 };
 
-export default HomeView;
+export default MyListsView;
