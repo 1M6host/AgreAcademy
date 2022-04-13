@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import BlueButtonView from "../../components/BlueButtonView";
+import ListHeaderComponent from "../../components/ListHeaderComponent";
 import { Colors } from "../../constants/Colors";
 import { styles } from "../../constants/styles";
 import { SHeight, SWidth } from "../../constants/Utls";
@@ -19,20 +20,7 @@ const listData = [
 
 const MyListsView = (props) => {
   const renderSectionHeaderComponent = ({ section }) => {
-    return (
-      <View
-        style={{
-          borderWidth: StyleSheet.hairlineWidth,
-          backgroundColor: Colors.white_Alpha_70,
-          flexDirection: "row",
-          justifyContent: "center",
-          paddingVertical: SHeight(1),
-          marginHorizontal: 1,
-        }}
-      >
-        <Text>List {section.title}</Text>
-      </View>
-    );
+    return <ListHeaderComponent children={<Text>List {section.title}</Text>} />;
   };
 
   const renderItemComponent = ({ item, index }) => {
@@ -60,15 +48,7 @@ const MyListsView = (props) => {
     );
   };
   return (
-    <View style={[styles.container]}>
-      <View
-        style={{
-          alignItems: "flex-start",
-          padding: SWidth(2.5),
-        }}
-      >
-        <BlueButtonView title={"BACK"} />
-      </View>
+    <View style={[styles.container, { backgroundColor: "#fff" }]}>
       <SectionList
         contentContainerStyle={{
           paddingHorizontal: SWidth(2.5),

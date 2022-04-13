@@ -187,23 +187,23 @@ const AddStudentView = (props) => {
   };
 
   const validateInput = () => {
-    if (!Validate.checkText("Name", form?.name)) {
-      return false;
-    } else if (!Validate.checkEmpty("Age", form?.age)) {
-      return false;
-    } else if (!Validate.checkEmpty("Gender", form?.gender)) {
-      return false;
-    } else if (!Validate.checkEmpty("Date of Birth", form?.dob)) {
-      return false;
-    } else if (!Validate.checkNumber("Mobile Number", 10, form?.mobile)) {
-      return false;
-    } else if (!Validate.checkEmpty("Course Type", form?.courseType)) {
-      return false;
-    } else if (!Validate.checkEmpty("Institute", form?.institute)) {
-      return false;
-    } else if (!Validate.checkEmpty("Course", form?.course)) {
-      return false;
-    }
+    // if (!Validate.checkText("Name", form?.name)) {
+    //   return false;
+    // } else if (!Validate.checkEmpty("Age", form?.age)) {
+    //   return false;
+    // } else if (!Validate.checkEmpty("Gender", form?.gender)) {
+    //   return false;
+    // } else if (!Validate.checkEmpty("Date of Birth", form?.dob)) {
+    //   return false;
+    // } else if (!Validate.checkNumber("Mobile Number", 10, form?.mobile)) {
+    //   return false;
+    // } else if (!Validate.checkEmpty("Course Type", form?.courseType)) {
+    //   return false;
+    // } else if (!Validate.checkEmpty("Institute", form?.institute)) {
+    //   return false;
+    // } else if (!Validate.checkEmpty("Course", form?.course)) {
+    //   return false;
+    // }
     props.onSaveClick(form);
   };
 

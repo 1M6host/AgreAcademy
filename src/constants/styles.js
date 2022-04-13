@@ -9,14 +9,16 @@ export const iconSize = SHeight(2);
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: SHeight(2.5),
+    borderTopLeftRadius: SWidth(2.5),
+    borderTopRightRadius: SWidth(2.5),
   },
   headerStyle: {
-    height: 50,
+    height: SHeight(8),
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     paddingHorizontal: SWidth(5),
-    backgroundColor: Colors.white,
-    elevation: 5,
     zIndex: 5,
   },
   container_loader_center_all: {
@@ -63,6 +65,11 @@ export const styles = StyleSheet.create({
     fontSize: Fontsize.H2,
     fontWeight: FontWeight.bold,
   },
+  text_H2_font_white: {
+    color: Colors.white,
+    fontSize: Fontsize.H2,
+    fontWeight: FontWeight.bold,
+  },
   text_H2_normal: {
     color: Colors.black,
     fontSize: Fontsize.H2,
@@ -92,7 +99,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#d3d3d3",
   },
   commonBackTextStyle: {
-    color:'#000'
+    color: "#000",
   },
   AppLogoStyle: {
     height: SHeight(20),

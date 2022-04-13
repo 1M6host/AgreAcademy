@@ -2,6 +2,7 @@ import React from "react";
 import { Text, FlatList, View, StyleSheet } from "react-native";
 import BlueButtonView from "../../components/BlueButtonView";
 import CheckBoxView from "../../components/CheckBoxView";
+import ListHeaderComponent from "../../components/ListHeaderComponent";
 import { Colors } from "../../constants/Colors";
 import { SHeight, SWidth } from "../../constants/Utls";
 import SelectSubjectView from "./SelectSubjectView";
@@ -13,19 +14,20 @@ const SubscriptionsView = (props) => {
 
   const listHeaderComponent = () => {
     return (
-      <View
-        style={{
-          borderWidth: StyleSheet.hairlineWidth,
-          backgroundColor: Colors.white_Alpha_70,
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-          paddingVertical: SHeight(1),
-          marginHorizontal: 1,
-        }}
-      >
-        <CheckBoxView title={"Subjects"} />
-        <CheckBoxView title={"Study Material"} />
-      </View>
+      <ListHeaderComponent
+        children={
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <CheckBoxView title={"Subjects"} />
+            <CheckBoxView title={"Study Material"} />
+          </View>
+        }
+      />
     );
   };
 

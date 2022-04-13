@@ -21,6 +21,8 @@ RootNavigator = () => {
       <Stack.Screen name="AddNewStudent" component={AddNewStudent} />
       <Stack.Screen name="Subscription" component={Subscriptions} />
       <Stack.Screen name="SubjectDetails" component={SubjectDetails} />
+      <Stack.Screen name="Subscriptions" component={Subscriptions} />
+      
     </Stack.Navigator>
   );
 };

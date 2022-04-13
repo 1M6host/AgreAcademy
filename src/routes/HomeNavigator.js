@@ -1,14 +1,15 @@
 import React from "react";
+import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import Subscriptions from "../screens/Subscriptions";
 import Profile from "../screens/Profile";
 import AddStudent from "../screens/AddStudent";
-import { SHeight } from "../constants/Utls";
+import { SHeight, SWidth } from "../constants/Utls";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import WatchVideo from "../screens/WatchVideo";
 import MyLists from "../screens/MytLists";
+import Videos from "../screens/Videos";
 
 const TabStack = createBottomTabNavigator();
 
@@ -38,61 +39,69 @@ const AddStudentNavigator = () => {
 
 HomeNavigator = () => {
   return (
-    <TabStack.Navigator
-      initialRouteName="Home"
-      backBehavior="initialRoute"
-      screenOptions={({ route }) => ({
-        // tabBarStyle:{
-        // 	paddingVertical:SHeight(1)
-        // },
-        lazy: true,
-        tabBarStyle: {
-          height: 60,
-          paddingVertical: 5,
-        },
-        tabBarLabelStyle: {
-          marginBottom: 10,
-        },
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+    <View style={{ backgroundColor: "#fff", flex: 1 }}>
+      <TabStack.Navigator
+        initialRouteName="Home"
+        backBehavior="initialRoute"
+        sceneContainerStyle={{ backgroundColor: "#fff" }}
+        screenOptions={({ route }) => ({
+          // tabBarStyle:{
+          // 	paddingVertical:SHeight(1)
+          // },
+          lazy: true,
+          tabBarHideOnKeyboard: true,
 
-          if (route.name === "Home") {
-            iconName = focused ? "home-outline" : "home";
-          } else if (route.name === "Profile") {
-            iconName = focused ? "account-outline" : "account";
-          } else if (route.name === "Add Student") {
-            iconName = focused ? "plus-minus" : "plus-minus-box";
-          } else if (route.name === "Subscription") {
-            iconName = focused ? "cart-outline" : "cart-plus";
-          }
+          tabBarStyle: {
+            paddingVertical: 5,
+            marginHorizontal: SWidth(5),
+            marginBottom: SWidth(5),
+            borderRadius: SWidth(2.5),
+          },
+          tabBarLabelStyle: {
+            marginBottom: 10,
+          },
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
 
-          return <Icon name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: "cyan",
-        tabBarInactiveTintColor: "gray",
-      })}
-    >
-      <TabStack.Screen
-        name="Home"
-        component={HomeNavNavigator}
-        options={{ headerShown: false }}
-      />
-      <TabStack.Screen
-        name="Profile"
-        component={MyLists}
-        options={{ headerShown: false }}
-      />
-      <TabStack.Screen
-        name="Add Student"
-        component={AddStudentNavigator}
-        options={{ headerShown: false, lazy: true }}
-      />
-      <TabStack.Screen
-        name="Subscription"
-        component={Subscriptions}
-        options={{ headerShown: false }}
-      />
-    </TabStack.Navigator>
+            if (route.name === "Home") {
+              iconName = focused ? "home-outline" : "home";
+            } else if (route.name === "Profile") {
+              iconName = focused ? "account-outline" : "account";
+            } else if (route.name === "Add Student") {
+              iconName = focused ? "account-plus-outline" : "account-plus";
+            } else if (route.name === "Subscription") {
+              iconName = focused ? "cart-outline" : "cart-plus";
+            }
+
+            return <Icon name={iconName} size={size} color={color} />;
+          },
+          tabBarShowLabel: false,
+          tabBarActiveTintColor: "cyan",
+          tabBarInactiveTintColor: "gray",
+        })}
+      >
+        <TabStack.Screen
+          name="Home"
+          component={HomeNavNavigator}
+          options={{ headerShown: false }}
+        />
+        <TabStack.Screen
+          name="Profile"
+          component={MyLists}
+          options={{ headerShown: false }}
+        />
+        <TabStack.Screen
+          name="Add Student"
+          component={AddStudentNavigator}
+          options={{ headerShown: false, lazy: true }}
+        />
+        <TabStack.Screen
+          name="Subscription"
+          component={Videos}
+          options={{ headerShown: false }}
+        />
+      </TabStack.Navigator>
+    </View>
   );
 };
 

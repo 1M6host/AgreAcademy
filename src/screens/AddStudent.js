@@ -1,7 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, ImageBackground } from "react-native";
 import Header from "../components/Header";
+import { images } from "../constants/images";
 import AddStudentView from "../views/AddStudent/AddStudentView";
 import HomeView from "../views/Home/HomeView";
 
@@ -13,7 +14,7 @@ export default AddStudent = () => {
     console.log("click");
   };
   return (
-    <>
+    <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>
       <Header title={"Student/Learner"} />
 
       <HomeView
@@ -25,6 +26,6 @@ export default AddStudent = () => {
         }}
         listData={listData}
       />
-    </>
+    </ImageBackground>
   );
 };

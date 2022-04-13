@@ -7,7 +7,7 @@ import { images } from "../constants/images";
 import { styles } from "../constants/styles";
 import HomeView from "../views/Home/HomeView";
 
-export default Home = () => {
+export default Videos = () => {
   const navigation = useNavigation();
   const openDetails = () => {
     navigation.navigate("WatchVideo");
@@ -15,7 +15,7 @@ export default Home = () => {
 
   return (
     <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>
-      <Header title={"Home"} />
+      <Header title={"Videos"} />
       <View
         style={[
           styles.container,
@@ -23,7 +23,7 @@ export default Home = () => {
           { backgroundColor: Colors.white },
         ]}
       >
-        <Text>Welcome to Dashboard !</Text>
+        <Text>Welcome to Videos !</Text>
       </View>
     </ImageBackground>
   );

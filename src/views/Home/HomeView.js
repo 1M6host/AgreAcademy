@@ -53,7 +53,7 @@ const HomeView = (props) => {
   };
 
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container, { backgroundColor: "#fff" }]}>
       <View
         style={{
           alignItems: "flex-end",

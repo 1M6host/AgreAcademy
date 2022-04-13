@@ -1,9 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Text, View } from "react-native";
+import { ImageBackground, View } from "react-native";
 import BlueButtonView from "../components/BlueButtonView";
 import Header from "../components/Header";
 import { Colors } from "../constants/Colors";
+import { images } from "../constants/images";
 import { services } from "../constants/services/services";
 import { styles } from "../constants/styles";
 import { SWidth } from "../constants/Utls";
@@ -16,6 +17,7 @@ export default AddNewStudent = () => {
     console.log("====================================");
     console.log(body);
     console.log("====================================");
+    navigation.navigate("Subscriptions");
     // services.addNewStudent(body).then((res) => {
     //   if (res.code == "200") {
     //     navigation.navigate("Subscription");
@@ -25,26 +27,14 @@ export default AddNewStudent = () => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: Colors.white }]}>
-      <Header title={"Add Student"} />
-      <View
-        style={{
-          alignItems: "flex-start",
-          padding: SWidth(2.5),
-        }}
-      >
-        <BlueButtonView
-          onPressProp={() => navigation.goBack()}
-          style={styles.commonBackStyle}
-          textStyle={styles.commonBackTextStyle}
-          title={"BACK"}
-        />
-      </View>
+    <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>
+      <Header backPress={() => navigation.goBack()} title={"Add Student"} />
+
       <AddStudentView
         onSaveClick={(from) => {
           onAddNewStudent(from);
         }}
       />
-    </View>
+    </ImageBackground>
   );
 };
