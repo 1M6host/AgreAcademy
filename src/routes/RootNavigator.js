@@ -5,14 +5,16 @@ import LoginNavigator from "./LoginNavigator";
 import HomeNavigator from "./HomeNavigator";
 import AddNewStudent from "../screens/AddNewStudent";
 import Subscriptions from "../screens/Subscriptions";
-import SubjectDetails from "../components/SubjectDetails";
+import ChapterDetails from "../components/ChapterDetails";
+import WatchVideo from "../screens/WatchVideo";
+import SubjectDetails from "../screens/SubjectDetails";
 
 const Stack = createNativeStackNavigator();
 
 RootNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName={"HomeNav"}
+      initialRouteName={"Splash"}
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Splash" component={Splash} />
@@ -22,7 +24,8 @@ RootNavigator = () => {
       <Stack.Screen name="Subscription" component={Subscriptions} />
       <Stack.Screen name="SubjectDetails" component={SubjectDetails} />
       <Stack.Screen name="Subscriptions" component={Subscriptions} />
-      
+      <Stack.Screen name="ChapterDetails" component={ChapterDetails} />
+      <Stack.Screen name="WatchVideo" component={WatchVideo} />
     </Stack.Navigator>
   );
 };

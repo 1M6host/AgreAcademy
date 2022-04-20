@@ -6,4 +6,6 @@ export const apiConst = {
   course: "course/",
   courseType: "coursetype/",
   courseTypeInstitutions: "CourseTypeInstitutions/",
+  student: "student/",
+  subject: "Subject/",
 };

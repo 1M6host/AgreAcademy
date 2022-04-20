@@ -16,25 +16,16 @@ const FormInputView = ({
   openDateSelector,
   maxLengthProp,
   keyboardTypeProp,
+  style,
+  containerStyle,
 }) => {
   return (
-    <View style={styles.FormInputContainer}>
-      <Text style={{ flex: 0.6 }}>{title} :</Text>
+    <View style={[styles.FormInputContainer, containerStyle]}>
+      {title && <Text style={{ flex: 0.6 }}>{title} :</Text>}
       {isDropDown ? (
         <TouchableOpacity
           onPress={openDropDown}
-          style={{
-            height: 50,
-            backgroundColor: Colors.white,
-            elevation: 5,
-            zIndex: 5,
-            borderRadius: SWidth(1),
-            flex: 1,
-            flexDirection: "row",
-            paddingHorizontal: 5,
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
+          style={[styles.formInputStyle, style]}
         >
           <Text>{value || title}</Text>
           <Icon name={"chevron-down"} size={iconSize} />
@@ -42,18 +33,7 @@ const FormInputView = ({
       ) : isDateSelector ? (
         <TouchableOpacity
           onPress={openDateSelector}
-          style={{
-            height: 50,
-            backgroundColor: Colors.white,
-            elevation: 5,
-            zIndex: 5,
-            borderRadius: SWidth(1),
-            flex: 1,
-            flexDirection: "row",
-            paddingHorizontal: 5,
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
+          style={[styles.formInputStyle, style]}
         >
           <Text>{value || title}</Text>
           <Icon name={"calendar-month"} size={25} />
@@ -64,7 +44,9 @@ const FormInputView = ({
           onChangeText={(text) => onChangeText(id, text)}
           maxLength={maxLengthProp || undefined}
           keyboardType={keyboardTypeProp || "default"}
+          placeholder={"Enter " + title}
           style={{
+            height: SHeight(7),
             backgroundColor: Colors.white,
             elevation: 5,
             zIndex: 5,

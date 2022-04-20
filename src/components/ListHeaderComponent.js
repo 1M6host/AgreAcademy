@@ -1,18 +1,18 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Colors } from "../constants/Colors";
-import { SHeight } from "../constants/Utls";
+import { SHeight, SWidth } from "../constants/Utls";
 
 const ListHeaderComponent = (props) => {
   return (
     <View
       style={{
-        borderWidth: StyleSheet.hairlineWidth,
-        backgroundColor: Colors.white_Alpha_70,
+        borderRadius: SWidth(1.5),
+        backgroundColor: "rgba(0,255,255,1)",
         flexDirection: "row",
-        justifyContent: "center",
-        paddingVertical: SHeight(1),
-        marginHorizontal: 1,
+        paddingVertical: SHeight(2),
+        paddingHorizontal: SWidth(5),
+        marginBottom: SHeight(1),
       }}
     >
       {props.children}

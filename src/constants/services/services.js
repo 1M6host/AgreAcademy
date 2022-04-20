@@ -16,7 +16,15 @@ export const services = {
   getInstituteById: (data) =>
     Api.get(UrlTypes.GetInstituteById + "?" + data, (response) => response),
   getCourseByInstituteId: (data) =>
-    Api.get(UrlTypes.GetCourseByInstituteId + "?" + data, (response) => response),
+    Api.get(
+      UrlTypes.GetCourseByInstituteId + "?" + data,
+      (response) => response
+    ),
+  getSubjectDetails: (data) =>
+    Api.get(
+      UrlTypes.GetSubjectByCourseAndInstitutionsID + "?" + data,
+      (response) => response
+    ),
   addNewStudent: (data) =>
-    Api.get(UrlTypes.AddNewStudent + "?" + data, (response) => response),
+    Api.post(UrlTypes.AddNewStudent, data, (response) => response),
 };

@@ -48,7 +48,7 @@ export default Subscriptions = ({ navigation }) => {
         >
           <BlueButtonView
             onPressProp={() => {
-              navigation.navigate("SubjectDetails");
+              navigation.navigate("AddStudent");
             }}
             style={{ width: SWidth(30), backgroundColor: "lime" }}
             title={"Pay Now"}

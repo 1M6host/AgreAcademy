@@ -9,10 +9,7 @@ import HomeView from "../views/Home/HomeView";
 
 export default Home = () => {
   const navigation = useNavigation();
-  const openDetails = () => {
-    navigation.navigate("WatchVideo");
-  };
-
+ 
   return (
     <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>
       <Header title={"Home"} />

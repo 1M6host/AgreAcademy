@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: SWidth(2.5),
   },
   headerStyle: {
-    height: SHeight(8),
+    height: SHeight(10),
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     paddingBottom: SWidth(5),
   },
   FormInputContainer: {
-    marginHorizontal: SWidth(2.5),
+    marginHorizontal: SWidth(5),
     marginVertical: SWidth(1.5),
     flexDirection: "row",
     alignItems: "center",
@@ -118,7 +118,7 @@ export const styles = StyleSheet.create({
     fontWeight: FontWeight.bold,
   },
   AppBlueButtonStyle: {
-    backgroundColor: "blue",
+    backgroundColor: "cyan",
     width: SWidth(30),
     height: 30,
     borderRadius: SWidth(1),
@@ -182,5 +182,22 @@ export const styles = StyleSheet.create({
   checkBoxContainer: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  formInputStyle: {
+    height: SHeight(7),
+    backgroundColor: Colors.white,
+    elevation: 5,
+    zIndex: 5,
+    borderRadius: SWidth(1),
+    flex: 1,
+    flexDirection: "row",
+    paddingHorizontal: 5,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  listHeaderTitleStyle: {
+    color: Colors.white,
+    fontSize: Fontsize.title,
+    fontWeight: FontWeight.bold,
   },
 });

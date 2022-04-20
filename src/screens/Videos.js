@@ -9,9 +9,6 @@ import HomeView from "../views/Home/HomeView";
 
 export default Videos = () => {
   const navigation = useNavigation();
-  const openDetails = () => {
-    navigation.navigate("WatchVideo");
-  };
 
   return (
     <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>

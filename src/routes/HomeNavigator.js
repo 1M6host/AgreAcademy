@@ -7,9 +7,10 @@ import Profile from "../screens/Profile";
 import AddStudent from "../screens/AddStudent";
 import { SHeight, SWidth } from "../constants/Utls";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import WatchVideo from "../screens/WatchVideo";
 import MyLists from "../screens/MytLists";
 import Videos from "../screens/Videos";
+import ChapterDetails from "../components/ChapterDetails";
+import SubjectDetails from "../screens/SubjectDetails";
 
 const TabStack = createBottomTabNavigator();
 
@@ -22,7 +23,6 @@ const HomeNavNavigator = () => {
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="HomeScreen" component={Home} />
-      <Stack.Screen name="WatchVideo" component={WatchVideo} />
     </Stack.Navigator>
   );
 };
@@ -32,7 +32,7 @@ const AddStudentNavigator = () => {
       initialRouteName={"AddStudent"}
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="AddStudent" component={AddStudent} />
+      <Stack.Screen name="AddStudent" component={SubjectDetails} />
     </Stack.Navigator>
   );
 };
@@ -48,6 +48,7 @@ HomeNavigator = () => {
           // tabBarStyle:{
           // 	paddingVertical:SHeight(1)
           // },
+
           lazy: true,
           tabBarHideOnKeyboard: true,
 
@@ -73,7 +74,23 @@ HomeNavigator = () => {
               iconName = focused ? "cart-outline" : "cart-plus";
             }
 
-            return <Icon name={iconName} size={size} color={color} />;
+            return (
+              <>
+                <Icon name={iconName} size={size} color={color} />
+                {focused && (
+                  <View
+                    style={{
+                      width: SWidth(1),
+                      height: SWidth(1),
+                      borderRadius: SWidth(10),
+                      backgroundColor: "cyan",
+                      marginTop: SHeight(0.5),
+                      elevation: 15,
+                    }}
+                  />
+                )}
+              </>
+            );
           },
           tabBarShowLabel: false,
           tabBarActiveTintColor: "cyan",
@@ -87,7 +104,7 @@ HomeNavigator = () => {
         />
         <TabStack.Screen
           name="Profile"
-          component={MyLists}
+          component={Profile}
           options={{ headerShown: false }}
         />
         <TabStack.Screen

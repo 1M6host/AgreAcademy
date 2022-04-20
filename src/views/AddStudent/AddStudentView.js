@@ -64,13 +64,25 @@ const AddStudentView = (props) => {
 
   const onChangeText = (key, val) => {
     let valTemp;
+    let valNewCourseTemp;
     if (key == "mobile" || key == "age") {
       valTemp = val.replace(/[^0-9]/g, "");
+    } else if (key == "courseType") {
+      valNewCourseTemp = {
+        institute: "",
+        course: "",
+      };
+      valTemp = val;
+    } else if (key == "institute") {
+      valNewCourseTemp = {
+        course: "",
+      };
+      valTemp = val;
     } else {
       valTemp = val;
     }
     setForm(() => {
-      return { ...form, ...{ [key]: valTemp } };
+      return { ...form, ...{ [key]: valTemp }, ...valNewCourseTemp };
     });
     // setVal(val);
   };
@@ -95,7 +107,7 @@ const AddStudentView = (props) => {
   useEffect(() => {
     const getDropdownData = async () => {
       if (!modalVisibility) {
-        if (dropDownKey == "courseType" && courseTypeData.length == 0) {
+        if (dropDownKey == "courseType") {
           const courseTypeData = await onGetCourseType();
           setCourseTypeData(courseTypeData);
           setModalVisibility(true);
@@ -123,7 +135,10 @@ const AddStudentView = (props) => {
   const onGetCourseType = async () => {
     return await services.getCourseType().then((res) => {
       if (res.code == "200") {
-        return res.dataList;
+        if (res.dataList.length !== 0) {
+          return res.dataList;
+        }
+        setDropDownKey("");
       }
       alert(res.message);
     });
@@ -135,18 +150,20 @@ const AddStudentView = (props) => {
         if (res.code == "200") {
           return res.dataList;
         }
+        setDropDownKey("");
         alert(res.message);
       });
   };
   const onGetCourseByInstituteId = async () => {
     return await services
       .getCourseByInstituteId(
-        `CourseTypeID=${form?.institute?.courseTypeInstitutionsID}&ID=${form?.courseType?.courseTypeID}`
+        `CourseTypeID=${form?.courseType?.courseTypeID}&ID=${form?.institute?.courseTypeInstitutionsID}`
       )
       .then((res) => {
         if (res.code == "200") {
           return res.dataList;
         }
+        setDropDownKey("");
         alert(res.message);
       });
   };
@@ -208,7 +225,7 @@ const AddStudentView = (props) => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: Colors.white }]}>
+    <>
       <ScrollView>
         <FormInputView
           id={"name"}
@@ -301,7 +318,7 @@ const AddStudentView = (props) => {
           onChange={setDate}
         />
       )}
-    </View>
+    </>
   );
 };
 
