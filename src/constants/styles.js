@@ -9,16 +9,16 @@ export const iconSize = SHeight(2);
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: SHeight(2.5),
+    paddingTop: SHeight(1),
     borderTopLeftRadius: SWidth(2.5),
     borderTopRightRadius: SWidth(2.5),
   },
   headerStyle: {
-    height: SHeight(10),
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: SWidth(5),
+    paddingBottom: SWidth(1.3),
     zIndex: 5,
   },
   container_loader_center_all: {
@@ -51,12 +51,17 @@ export const styles = StyleSheet.create({
   },
   FormInputContainer: {
     marginHorizontal: SWidth(5),
-    marginVertical: SWidth(1.5),
+    marginVertical: SWidth(2.5),
     flexDirection: "row",
     alignItems: "center",
   },
   text_H1: {
     color: Colors.black,
+    fontSize: Fontsize.H1,
+    fontWeight: FontWeight.bold,
+  },
+  text_H1_white: {
+    color: Colors.white,
     fontSize: Fontsize.H1,
     fontWeight: FontWeight.bold,
   },
@@ -109,7 +114,6 @@ export const styles = StyleSheet.create({
   AppButtonStyle: {
     width: SWidth(85),
     height: SHeight(6),
-    marginTop: SHeight(2),
     borderRadius: SWidth(1),
   },
   AppButtonTextStyle: {
@@ -118,9 +122,7 @@ export const styles = StyleSheet.create({
     fontWeight: FontWeight.bold,
   },
   AppBlueButtonStyle: {
-    backgroundColor: "cyan",
-    width: SWidth(30),
-    height: 30,
+    backgroundColor: Colors.listHeader,
     borderRadius: SWidth(1),
     alignItems: "center",
     justifyContent: "center",
@@ -176,6 +178,7 @@ export const styles = StyleSheet.create({
   },
   modalContentInnerContainer: {
     width: SWidth(80),
+    maxHeight: SHeight(80),
     backgroundColor: Colors.white,
     elevation: 5,
   },
@@ -194,6 +197,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 5,
     alignItems: "center",
     justifyContent: "space-between",
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: Colors.listHeader,
   },
   listHeaderTitleStyle: {
     color: Colors.white,

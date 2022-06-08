@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ImageBackground, View } from "react-native";
+import { ImageBackground, View, Linking } from "react-native";
 import { Colors } from "../constants/Colors";
 import { images } from "../constants/images";
 import { styles } from "../constants/styles";
@@ -7,22 +7,9 @@ import { SWidth } from "../constants/Utls";
 import BlueButtonView from "./BlueButtonView";
 import Header from "./Header";
 import HomeView from "../views/Home/HomeView";
+import { useIsFocused, useRoute } from "@react-navigation/native";
+import { services } from "../constants/services/services";
 import ModalView from "./ModalView";
-import { useRoute } from "@react-navigation/native";
-const genderData = [
-  {
-    id: 0,
-    name: "Male",
-  },
-  {
-    id: 1,
-    name: "Female",
-  },
-  {
-    id: 3,
-    name: "Prefer not to say",
-  },
-];
 
 const tempListData = [
   {
@@ -63,24 +50,63 @@ const tempListData = [
 
 export default ChapterDetails = ({ navigation }) => {
   const route = useRoute();
-  const [listData, setListData] = useState(tempListData);
-  const [selectedSubject, setSelectedSubject] = useState({
-    id: 0,
-    name: "1",
-  });
+  const isFocused = useIsFocused();
+  const [listData, setListData] = useState([]);
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const [dropdownListData, setDropdownListData] = useState(null);
+
+  const openDropDownClick = () => {
+    setModalVisibility(!modalVisibility);
+  };
 
   useEffect(() => {
-    // setSelectedSubject(route.params.params);
-  });
+    isFocused && getdata();
+  }, []);
+
+  const getdata = async () => {
+    if (route?.params?.subjectData) {
+      getTopicList(route?.params?.subjectData);
+    }
+  };
+
+  const getTopicList = async (data) => {
+    services.getChapterDetails(`ChapterID=${data.chapterID}`).then((res) => {
+      if (res.code == "200") {
+        if (res.dataList.length) {
+          setListData(res.dataList);
+        }
+      } else {
+        setListData([]);
+      }
+    });
+  };
 
   const onPlay = (item) => {
     console.log("onPlay", item);
-    navigation.navigate("WatchVideo");
+    services
+      .getTopicDetails(`TopicId=${item?.topicID}`)
+      .then((res) => {
+        if (res.code == "200") {
+          setDropdownListData(res.dataList);
+          openDropDownClick();
+        } else {
+          setDropdownListData([]);
+        }
+      });
+    // navigation.navigate("WatchVideo", { topic: item });
+    // Linking.openURL(
+    //   " https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"
+    // );
+  };
+
+  const openTopic = (topic) => {
+    console.log(topic);
+	navigation.navigate("WatchVideo", { topic: topic });
   };
 
   return (
     <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>
-      <Header backPress={() => navigation.goBack()} title={"Chapter Details"} />
+      <Header backPress={() => navigation.goBack()} title={"Topic List"} />
 
       <HomeView
         listType={"video"} // detail, video
@@ -88,6 +114,16 @@ export default ChapterDetails = ({ navigation }) => {
           onPlay(item);
         }}
         listData={listData}
+      />
+      <ModalView
+        itemKey={"topic"}
+        dropDownList={dropdownListData}
+        modalVisibility={modalVisibility}
+        setModalVisibility={() => openDropDownClick()}
+        onSelectValue={(key, item) => {
+          openTopic(item);
+          openDropDownClick();
+        }}
       />
     </ImageBackground>
   );

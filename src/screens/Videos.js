@@ -5,7 +5,6 @@ import Header from "../components/Header";
 import { Colors } from "../constants/Colors";
 import { images } from "../constants/images";
 import { styles } from "../constants/styles";
-import HomeView from "../views/Home/HomeView";
 
 export default Videos = () => {
   const navigation = useNavigation();

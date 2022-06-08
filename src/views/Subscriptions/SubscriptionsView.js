@@ -15,12 +15,13 @@ const SubscriptionsView = (props) => {
   const listHeaderComponent = () => {
     return (
       <ListHeaderComponent
+        backgroundColor={Colors.white}
         children={
           <View
             style={{
               width: "100%",
               flexDirection: "row",
-              justifyContent: "space-evenly",
+              justifyContent: "space-between",
             }}
           >
             <CheckBoxView title={"Subjects"} />
@@ -33,14 +34,33 @@ const SubscriptionsView = (props) => {
 
   return (
     <View>
+      <View
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          paddingHorizontal: SWidth(5),
+          paddingVertical: SWidth(2.5),
+          justifyContent: "space-between",
+        }}
+      >
+        <View style={{ flex: 1 }}>
+          <CheckBoxView title={"Subjects"} />
+        </View>
+        <View style={{ paddingStart: SWidth(5) }}>
+          <CheckBoxView title={"Study Material"} />
+        </View>
+      </View>
       <FlatList
         contentContainerStyle={{
-          paddingHorizontal: SWidth(2.5),
-          paddingTop: 1,
+          margin: SWidth(2.5),
+          elevation: 5,
+          paddingVertical: SWidth(2.5),
+          paddingHorizontal: SWidth(5),
+          borderRadius: SWidth(2.5),
+          backgroundColor: Colors.white,
         }}
         data={props.subjectsData}
         renderItem={renderItemComponent}
-        ListHeaderComponent={listHeaderComponent}
       />
     </View>
   );

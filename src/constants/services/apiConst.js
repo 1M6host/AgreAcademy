@@ -8,4 +8,8 @@ export const apiConst = {
   courseTypeInstitutions: "CourseTypeInstitutions/",
   student: "student/",
   subject: "Subject/",
+  chapter: "Chapter/",
+  topic: "Topic/",
+  VideoSession: "VideoSession/",
+  Subscription: "Subscription/",
 };

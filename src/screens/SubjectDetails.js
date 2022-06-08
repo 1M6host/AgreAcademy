@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import HomeView from "../views/Home/HomeView";
 import ModalView from "../components/ModalView";
 import { services } from "../constants/services/services";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useRoute } from "@react-navigation/native";
 const genderData = [
   {
     id: 0,
@@ -35,60 +35,73 @@ const tempListData = [
 
 export default SubjectDetails = ({ navigation }) => {
   const [listData, setListData] = useState();
-  const [selectedSubject, setSelectedSubject] = useState({});
+  const [selectedSubject, setSelectedSubject] = useState(null);
   const [modalVisibility, setModalVisibility] = useState(false);
-  const [dropdownListData, setDropdownListData] = useState([]);
+  const [dropdownListData, setDropdownListData] = useState(null);
   const isFocused = useIsFocused();
-  
+  const route = useRoute();
+
   const getdata = async () => {
-    const data = await getData("UserObj");
-    console.log(data);
-    if (!listData && data.fk_CourseTypeID) {
-      getSubjectDetails(data);
+    if (route?.params?.studentData) {
+      getSubjectList(route?.params?.studentData);
     }
   };
 
   useEffect(() => {
     console.log(isFocused);
-    getdata();
-  }, [isFocused]);
+    !dropdownListData && isFocused && getdata();
+  });
+
+  useEffect(() => {
+    if (selectedSubject) {
+      setListData([]);
+      getSubjectDetails(selectedSubject);
+    }
+  }, [selectedSubject]);
 
   const getSubjectDetails = async (data) => {
+    services.getSubjectDetails(`SubjectID=${data.subjectID}`).then((res) => {
+      if (res.code == "200") {
+        if (res.dataList.length) {
+          // const result = res.dataList.reduce((accum, current) => {
+          //   let subjectGrp = accum.find((x) => x.title === current.name);
+          //   if (!subjectGrp) {
+          //     subjectGrp = { title: current.name, data: [] };
+          //     accum.push(subjectGrp);
+          //   }
+          //   subjectGrp.data.push(current);
+          //   return accum;
+          // }, []);
+
+          setListData(res.dataList);
+        }
+      } else {
+        setListData([]);
+      }
+    });
+  };
+
+  const getSubjectList = async (data) => {
     services
-      .getSubjectDetails(
-        `CourseTypeId=${data.fk_CourseTypeID}&CourseTypeInstitutionsID=${data.fk_CourseTypeInstitutionsID}&CourseID=${data.fk_CourseID}`
+      .getSubjectList(
+        `CourseTypeId=${data.courseTypeID}&CourseTypeInstitutionsID=${data.courseTypeInstitutionsID}&CourseID=${data.courseID}`
       )
       .then((res) => {
         if (res.code == "200") {
-          const result = res.dataList.reduce((accum, current) => {
-            let subjectGrp = accum.find((x) => x.title === current.description);
-            if (!subjectGrp) {
-              subjectGrp = { title: current.description, data: [] };
-              accum.push(subjectGrp);
-            }
-            subjectGrp.data.push(current);
-            return accum;
-          }, []);
-
-          setDropdownListData(
-            result.map((e, i) => {
-              return { id: i, name: e.title };
-            })
-          );
-          setSelectedSubject({ id: 0, name: result[0].title });
-          setListData(result);
-          console.log(result);
+          if (res.dataList.length) {
+            setSelectedSubject(res.dataList[0]);
+            setDropdownListData(res.dataList);
+          }
         } else {
           setDropdownListData([]);
           setSelectedSubject({});
-          setListData([]);
         }
       });
   };
 
   const openDetails = (item) => {
     console.log("openDetails", item);
-    navigation.navigate("ChapterDetails", { params: item });
+    navigation.navigate("ChapterDetails", { subjectData: item });
   };
 
   const onChangeChapter = (key, item) => {
@@ -102,16 +115,13 @@ export default SubjectDetails = ({ navigation }) => {
 
   return (
     <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>
-      <Header title={"Add Student"} />
+      <Header title={"Chapter List"} backPress={() => navigation.goBack()} />
 
       <HomeView
         listType={"detail"} // detail, video
         dropdownTitle={"Select Subject"}
         onOpenDropDown={() => {
           openDropDownClick();
-        }}
-        onAddClick={() => {
-          navigation.navigate("AddNewStudent");
         }}
         subjectValue={selectedSubject?.name || ""}
         onOpenDetails={(item) => {

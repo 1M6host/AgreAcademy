@@ -1,4 +1,4 @@
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { ScrollView, View, Modal } from "react-native";
 import BlueButtonView from "../../components/BlueButtonView";
@@ -11,17 +11,9 @@ import { SHeight, SWidth } from "../../constants/Utls";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { services } from "../../constants/services/services";
 import { Validate } from "../../constants/Validations";
+import ButtonView from "../../components/ButtonView";
 
-const innitialVal = {
-  name: "",
-  age: "",
-  gender: "",
-  dob: "",
-  mobile: "",
-  courseType: "",
-  institute: "",
-  course: "",
-};
+
 
 const dummyData = [
   {
@@ -54,7 +46,6 @@ const genderData = [
 ];
 
 const AddStudentView = (props) => {
-  const [form, setForm] = useState(innitialVal);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [dropDownKey, setDropDownKey] = useState("");
   const [courseTypeData, setCourseTypeData] = useState([]);
@@ -62,34 +53,9 @@ const AddStudentView = (props) => {
   const [courseData, setCourseData] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  const onChangeText = (key, val) => {
-    let valTemp;
-    let valNewCourseTemp;
-    if (key == "mobile" || key == "age") {
-      valTemp = val.replace(/[^0-9]/g, "");
-    } else if (key == "courseType") {
-      valNewCourseTemp = {
-        institute: "",
-        course: "",
-      };
-      valTemp = val;
-    } else if (key == "institute") {
-      valNewCourseTemp = {
-        course: "",
-      };
-      valTemp = val;
-    } else {
-      valTemp = val;
-    }
-    setForm(() => {
-      return { ...form, ...{ [key]: valTemp }, ...valNewCourseTemp };
-    });
-    // setVal(val);
-  };
-
   useEffect(() => {
-    console.log("form :", form);
-  }, [form]);
+    console.log("props.formData>>>>>>>>",props.formData);
+  });
 
   const getDropdownData = () => {
     if (dropDownKey == "gender") {
@@ -145,7 +111,7 @@ const AddStudentView = (props) => {
   };
   const onGetInstituteById = async () => {
     return await services
-      .getInstituteById(`ID=${form?.courseType?.courseTypeID}`)
+      .getInstituteById(`ID=${props.formData?.courseType?.courseTypeID}`)
       .then((res) => {
         if (res.code == "200") {
           return res.dataList;
@@ -157,7 +123,7 @@ const AddStudentView = (props) => {
   const onGetCourseByInstituteId = async () => {
     return await services
       .getCourseByInstituteId(
-        `CourseTypeID=${form?.courseType?.courseTypeID}&ID=${form?.institute?.courseTypeInstitutionsID}`
+        `CourseTypeID=${props.formData?.courseType?.courseTypeID}&ID=${props.formData?.institute?.courseTypeInstitutionsID}`
       )
       .then((res) => {
         if (res.code == "200") {
@@ -182,7 +148,7 @@ const AddStudentView = (props) => {
     console.log(date);
     setShowDatePicker(false);
 
-    onChangeText("dob", String(date));
+    props.onValueChange("dob", String(date));
   };
 
   const formatDate = (d) => {
@@ -204,24 +170,24 @@ const AddStudentView = (props) => {
   };
 
   const validateInput = () => {
-    // if (!Validate.checkText("Name", form?.name)) {
-    //   return false;
-    // } else if (!Validate.checkEmpty("Age", form?.age)) {
-    //   return false;
-    // } else if (!Validate.checkEmpty("Gender", form?.gender)) {
-    //   return false;
-    // } else if (!Validate.checkEmpty("Date of Birth", form?.dob)) {
-    //   return false;
-    // } else if (!Validate.checkNumber("Mobile Number", 10, form?.mobile)) {
-    //   return false;
-    // } else if (!Validate.checkEmpty("Course Type", form?.courseType)) {
-    //   return false;
-    // } else if (!Validate.checkEmpty("Institute", form?.institute)) {
-    //   return false;
-    // } else if (!Validate.checkEmpty("Course", form?.course)) {
-    //   return false;
-    // }
-    props.onSaveClick(form);
+    if (!Validate.checkText("Name", props.formData?.name)) {
+      return false;
+    } else if (!Validate.checkEmpty("Age", props.formData?.age)) {
+      return false;
+    } else if (!Validate.checkEmpty("Gender", props.formData?.gender)) {
+      return false;
+    } else if (!Validate.checkEmpty("Date of Birth", props.formData?.dob)) {
+      return false;
+    } else if (!Validate.checkNumber("Mobile Number", 10, props.formData?.mobile)) {
+      return false;
+    } else if (!Validate.checkEmpty("Course Type", props.formData?.courseType)) {
+      return false;
+    } else if (!Validate.checkEmpty("Institute", props.formData?.institute)) {
+      return false;
+    } else if (!Validate.checkEmpty("Course", props.formData?.course)) {
+      return false;
+    }
+    props.onSaveClick(props.formData);
   };
 
   return (
@@ -231,59 +197,59 @@ const AddStudentView = (props) => {
           id={"name"}
           title={"Name"}
           maxLengthProp={30}
-          onChangeText={onChangeText}
-          value={form["name"]}
+          onChangeText={props.onValueChange}
+          value={props.formData["name"]}
         />
         <FormInputView
           id={"age"}
           title={"Age"}
           maxLengthProp={2}
           keyboardTypeProp={"number-pad"}
-          onChangeText={onChangeText}
-          value={form["age"]}
+          onChangeText={props.onValueChange}
+          value={props.formData["age"]}
         />
         <FormInputView
           isDropDown
           id={"gender"}
           title={"Gender"}
           openDropDown={() => openDropDownClick("gender")}
-          value={form["gender"].name}
+          value={props.formData["gender"].name}
         />
         <FormInputView
           isDateSelector
           id={"dob"}
           title={"DOB"}
           openDateSelector={() => openDateSelector("dob")}
-          value={formatDate(form["dob"])}
+          value={formatDate(props.formData["dob"])}
         />
         <FormInputView
           id={"mobile"}
           title={"Mobile"}
           maxLengthProp={10}
           keyboardTypeProp={"number-pad"}
-          onChangeText={onChangeText}
-          value={form["mobile"]}
+          onChangeText={props.onValueChange}
+          value={props.formData["mobile"]}
         />
         <FormInputView
           isDropDown
           id={"courseType"}
           title={"Course Type"}
           openDropDown={() => openDropDownClick("courseType")}
-          value={form["courseType"].name}
+          value={props.formData["courseType"].name}
         />
         <FormInputView
           isDropDown
           id={"institute"}
           title={"Institute"}
           openDropDown={() => openDropDownClick("institute")}
-          value={form["institute"].name}
+          value={props.formData["institute"].name}
         />
         <FormInputView
           isDropDown
           id={"course"}
           title={"Course"}
           openDropDown={() => openDropDownClick("course")}
-          value={form["course"].name}
+          value={props.formData["course"].name}
         />
         <View
           style={{
@@ -291,10 +257,10 @@ const AddStudentView = (props) => {
             padding: SWidth(2.5),
           }}
         >
-          <BlueButtonView
+          <ButtonView
             onPressProp={() => validateInput()}
             title={"Save"}
-            style={{ width: SWidth(60), height: 45 }}
+            style={{ width: SWidth(80), height: 45 }}
           />
         </View>
       </ScrollView>
@@ -304,7 +270,7 @@ const AddStudentView = (props) => {
         modalVisibility={modalVisibility}
         setModalVisibility={() => openDropDownClick()}
         onSelectValue={(key, item) => {
-          onChangeText(key, item);
+          props.onValueChange(key, item);
           openDropDownClick();
         }}
       />
@@ -314,7 +280,7 @@ const AddStudentView = (props) => {
           maximumDate={
             new Date(new Date().setFullYear(new Date().getFullYear() - 5))
           }
-          value={form["dob"] !== "" ? new Date(form["dob"]) : new Date()}
+          value={props.formData["dob"] !== "" ? new Date(props.formData["dob"]) : new Date()}
           onChange={setDate}
         />
       )}

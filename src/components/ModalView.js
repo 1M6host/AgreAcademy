@@ -1,5 +1,12 @@
-import React from "react";
-import { Text, View, Modal, FlatList, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  Text,
+  View,
+  Modal,
+  FlatList,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { Colors } from "../constants/Colors";
 import { styles } from "../constants/styles";
 import { SHeight, SWidth } from "../constants/Utls";
@@ -14,7 +21,7 @@ const ModalView = (props) => {
         }}
         style={{ flex: 1, paddingVertical: SHeight(1.5), alignItems: "center" }}
       >
-        <Text>{item.name}</Text>
+        <Text>{item.name || item.title}</Text>
       </TouchableOpacity>
     );
   };
@@ -23,7 +30,10 @@ const ModalView = (props) => {
   };
   return (
     <Modal transparent animationType="slide" visible={props.modalVisibility}>
-      <View style={styles.modalContentContainer}>
+      <TouchableOpacity
+        onPressIn={() => props.setModalVisibility()}
+        style={styles.modalContentContainer}
+      >
         <View style={styles.modalContentInnerContainer}>
           <FlatList
             data={props.dropDownList || []}
@@ -31,7 +41,7 @@ const ModalView = (props) => {
             ItemSeparatorComponent={itemSeparatorComponent}
           />
         </View>
-      </View>
+      </TouchableOpacity>
     </Modal>
   );
 };

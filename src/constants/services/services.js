@@ -20,11 +20,34 @@ export const services = {
       UrlTypes.GetCourseByInstituteId + "?" + data,
       (response) => response
     ),
-  getSubjectDetails: (data) =>
+  getSubjectList: (data) =>
     Api.get(
       UrlTypes.GetSubjectByCourseAndInstitutionsID + "?" + data,
       (response) => response
     ),
+  getSubjectDetails: (data) =>
+    Api.get(
+      UrlTypes.GetChapterBySubjectID + "?" + data,
+      (response) => response
+    ),
+  getChapterDetails: (data) =>
+    Api.get(UrlTypes.GetTopicByChapterID + "?" + data, (response) => response),
+
   addNewStudent: (data) =>
     Api.post(UrlTypes.AddNewStudent, data, (response) => response),
+
+  getTopicDetails: (data) =>
+    Api.get(
+      UrlTypes.GetVideoSessionByTopicID + "?" + data,
+      (response) => response
+    ),
+
+  updateStudent: (data) =>
+    Api.post(UrlTypes.UpdateStudent, data, (response) => response),
+
+  getStudents: (data) =>
+    Api.get(UrlTypes.GetStudent + "?" + data, (response) => response),
+
+  SkipForTrial: (data) =>
+    Api.get(UrlTypes.SkipForTrial + "?" + data, (response) => response),
 };

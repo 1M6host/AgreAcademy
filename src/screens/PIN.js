@@ -23,8 +23,8 @@ export default PIN = () => {
         .setPIN(`MobileNumber=${route.params.mobile}&PIN=${pin}`)
         .then(async (res) => {
           console.log(res);
-          if (res.status == "Ok") {
-            await setData("UserObj", res.data);
+          if (res.status == "Success") {
+            await setData("UserObj", res?.data);
             navigate.replace("HomeNav");
           }
           alert(res.message || res.errors);

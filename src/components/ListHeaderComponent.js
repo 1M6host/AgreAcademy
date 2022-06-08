@@ -8,7 +8,7 @@ const ListHeaderComponent = (props) => {
     <View
       style={{
         borderRadius: SWidth(1.5),
-        backgroundColor: "rgba(0,255,255,1)",
+        backgroundColor: props.backgroundColor || Colors.listHeader,
         flexDirection: "row",
         paddingVertical: SHeight(2),
         paddingHorizontal: SWidth(5),

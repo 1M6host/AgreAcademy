@@ -11,6 +11,7 @@ import MyLists from "../screens/MytLists";
 import Videos from "../screens/Videos";
 import ChapterDetails from "../components/ChapterDetails";
 import SubjectDetails from "../screens/SubjectDetails";
+import { Colors } from "../constants/Colors";
 
 const TabStack = createBottomTabNavigator();
 
@@ -32,7 +33,7 @@ const AddStudentNavigator = () => {
       initialRouteName={"AddStudent"}
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="AddStudent" component={SubjectDetails} />
+      <Stack.Screen name="AddStudent" component={AddStudent} />
     </Stack.Navigator>
   );
 };
@@ -54,13 +55,8 @@ HomeNavigator = () => {
 
           tabBarStyle: {
             paddingVertical: 5,
-            marginHorizontal: SWidth(5),
-            marginBottom: SWidth(5),
-            borderRadius: SWidth(2.5),
           },
-          tabBarLabelStyle: {
-            marginBottom: 10,
-          },
+         
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
@@ -68,16 +64,16 @@ HomeNavigator = () => {
               iconName = focused ? "home-outline" : "home";
             } else if (route.name === "Profile") {
               iconName = focused ? "account-outline" : "account";
-            } else if (route.name === "Add Student") {
-              iconName = focused ? "account-plus-outline" : "account-plus";
-            } else if (route.name === "Subscription") {
-              iconName = focused ? "cart-outline" : "cart-plus";
+            } else if (route.name === "Add Course") {
+              iconName = focused ? "notebook-plus-outline" : "notebook-plus";
+            } else if (route.name === "Videos") {
+              iconName = focused ? "movie-open-play-outline" : "movie-open-play";
             }
 
             return (
               <>
                 <Icon name={iconName} size={size} color={color} />
-                {focused && (
+                {/*focused && (
                   <View
                     style={{
                       width: SWidth(1),
@@ -88,12 +84,11 @@ HomeNavigator = () => {
                       elevation: 15,
                     }}
                   />
-                )}
+                )*/}
               </>
             );
           },
-          tabBarShowLabel: false,
-          tabBarActiveTintColor: "cyan",
+          tabBarActiveTintColor: Colors.listHeader,
           tabBarInactiveTintColor: "gray",
         })}
       >
@@ -108,12 +103,12 @@ HomeNavigator = () => {
           options={{ headerShown: false }}
         />
         <TabStack.Screen
-          name="Add Student"
+          name="Add Course"
           component={AddStudentNavigator}
           options={{ headerShown: false, lazy: true }}
         />
         <TabStack.Screen
-          name="Subscription"
+          name="Videos"
           component={Videos}
           options={{ headerShown: false }}
         />

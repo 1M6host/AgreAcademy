@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { styles } from "../constants/styles";
+import { SWidth } from "../constants/Utls";
 
 const CheckBoxView = (props) => {
   const [checked, setChecked] = useState(false);
@@ -12,10 +13,10 @@ const CheckBoxView = (props) => {
       onPress={() => setChecked(!checked)}
     >
       <Icon
-        name={checked ? "checkbox-marked" : "checkbox-blank-outline"}
-        style={{ paddingHorizontal: 5 }}
+        name={checked ? "checkbox-marked-outline" : "checkbox-blank-outline"}
+        size={24}
       />
-      <Text>{props.title}</Text>
+      <Text style={[styles.text_normal_bold,{ paddingStart: SWidth(2.5) }]}>{props.title}</Text>
     </TouchableOpacity>
   );
 };

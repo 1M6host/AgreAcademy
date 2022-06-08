@@ -1,10 +1,11 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React from "react";
 import { Text, View, ImageBackground } from "react-native";
 import BlueButtonView from "../components/BlueButtonView";
 import Header from "../components/Header";
 import { Colors } from "../constants/Colors";
 import { images } from "../constants/images";
+import { services } from "../constants/services/services";
 import { styles } from "../constants/styles";
 import { SHeight, SWidth } from "../constants/Utls";
 import SubscriptionsDetails from "../views/Subscriptions/SubscriptionsDetails";
@@ -17,6 +18,26 @@ const subjectsData = [
 ];
 
 export default Subscriptions = ({ navigation }) => {
+  const route = useRoute();
+  const skipForTrial = () => {
+    services
+      .SkipForTrial(`StudentID=${route?.params?.studentObj?.studentID}`)
+      .then((res) => {
+        console.log("StudentObj res", res);
+        // if (res.code == "200") {
+        //   if (res.dataList.length) {
+        //     setSelectedSubject(res.dataList[0]);
+        //     setDropdownListData(res.dataList);
+        //   }
+        // } else {
+        //   setDropdownListData([]);
+        //   setSelectedSubject({});
+        // }
+        alert(res?.message);
+        navigation.goBack();
+      });
+  };
+
   return (
     <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>
       <Header
@@ -25,39 +46,15 @@ export default Subscriptions = ({ navigation }) => {
         }}
         title={"Subscriptions"}
       />
-      <View style={[styles.container, { backgroundColor: "#fff" }]}>
+      <View style={[styles.container, { backgroundColor: "#F8F7FF" }]}>
         <SubscriptionsView subjectsData={subjectsData} />
-        <View
-          style={{
-            height: 1,
-            width: "100%",
-            backgroundColor: Colors.lightgrey,
-            marginVertical: SHeight(1.5),
+
+        <SubscriptionsDetails
+          onPayLater={() => {
+            skipForTrial();
           }}
+          onPayNow={() => {}}
         />
-        <SubscriptionsDetails />
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            position: "absolute",
-            bottom: 10,
-            left: 0,
-            right: 0,
-          }}
-        >
-          <BlueButtonView
-            onPressProp={() => {
-              navigation.navigate("AddStudent");
-            }}
-            style={{ width: SWidth(30), backgroundColor: "lime" }}
-            title={"Pay Now"}
-          />
-          <BlueButtonView
-            style={{ width: SWidth(35), backgroundColor: "red" }}
-            title={"Skip for Trial"}
-          />
-        </View>
       </View>
     </ImageBackground>
   );
