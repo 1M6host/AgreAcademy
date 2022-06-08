@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { Component } from 'react';
 import { View, Text, ImageBackground } from 'react-native';
 import { images } from '../constants/images';
+import { setData } from '../constants/Utls';
 import LoginView from '../views/Login/LoginView';
 
 export default Login = () => {
@@ -15,14 +16,15 @@ export default Login = () => {
         navigate.navigate("ForgetPassword")
     }
 
-    const onLogin = () => {
+    const onLogin = async(UserObj) => {
+        await setData("UserObj",UserObj)
         navigate.replace("HomeNav")
     }
 
     return (
         <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>
             <LoginView
-                onLoginClick={() => onLogin()}
+                onLoginClick={(UserObj) => onLogin(UserObj)}
                 onRegisterClick={() => onRegister()}
                 forgotPassword={() => forgotPasswordClick()}
             />

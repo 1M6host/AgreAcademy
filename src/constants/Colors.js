@@ -1,10 +1,16 @@
 export const Colors = {
-    black: "#000",
-    white: "#fff",
-    orange: "#FFA500",
-    grey: "#808080",
-    lightgrey: "#D3D3D3",
-    fbBlue: "#5890FF",
-    white_Alpha_70: 'rgba(255,255,255,0.9)',
-    white_Alpha_loader: 'rgba(255,255,255,0.5)'
-}
+  black: "#000",
+  white: "#fff",
+  orange: "#FFA500",
+  red: "#EF233C",
+  subscribedBgC: "#C4C4C4",
+  listHeader: "#13ABD8",
+  appThemeOpacity_70: "rgba(19, 171, 216,0.7)",
+  grey: "#808080",
+  lightgrey: "#D3D3D3",
+  green: "#90EE90",
+  buttonGreen: "#239857",
+  fbBlue: "#5890FF",
+  white_Alpha_70: "rgba(255,255,255,0.9)",
+  white_Alpha_loader: "rgba(255,255,255,0.5)",
+};

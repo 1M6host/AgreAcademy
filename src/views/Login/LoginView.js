@@ -12,7 +12,7 @@ const LoginView = (props) => {
     const onLogin = (body) => {
         services.login(body).then(res => {
             if (res.code == "200") {
-                props.onLoginClick()
+                props.onLoginClick(res.data)
             }
             alert(res.message)
         })
