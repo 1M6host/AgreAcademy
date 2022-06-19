@@ -64,7 +64,7 @@ export default WatchVideo = ({ navigation }) => {
         />} */}
         <View
           style={{
-            flex: 1,
+            height:SHeight(45)            
           }}
         >
           {/* <Video
@@ -84,6 +84,7 @@ export default WatchVideo = ({ navigation }) => {
             }}
           /> */}
           <WebView
+            contentMode="mobile"
             allowsFullscreenVideo
             allowsInlineMediaPlayback
             mediaPlaybackRequiresUserAction

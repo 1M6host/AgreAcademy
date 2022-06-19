@@ -12,6 +12,7 @@ export const services = {
     Api.get(UrlTypes.ForgotPassword + "?" + data, (response) => response),
   resetPassword: (data) =>
     Api.get(UrlTypes.ResetPassword + "?" + data, (response) => response),
+  getDashboard: () => Api.get(UrlTypes.GetDashboard, (response) => response),
   getCourseType: () => Api.get(UrlTypes.GetCourseType, (response) => response),
   getInstituteById: (data) =>
     Api.get(UrlTypes.GetInstituteById + "?" + data, (response) => response),
@@ -47,7 +48,12 @@ export const services = {
 
   getStudents: (data) =>
     Api.get(UrlTypes.GetStudent + "?" + data, (response) => response),
-
+  getPlanDetails: (data) =>
+    Api.get(UrlTypes.getPlanDetails + "?" + data, (response) => response),
+  createOrder: (data) =>
+    Api.post(UrlTypes.CreateOrder, data, (response) => response),
   SkipForTrial: (data) =>
     Api.get(UrlTypes.SkipForTrial + "?" + data, (response) => response),
+  GetUserProfile: (data) =>
+    Api.get(UrlTypes.GetUserProfile + "?" + data, (response) => response),
 };

@@ -1,6 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Dimensions } from "react-native";
 
+export const RZPKEY = "rzp_test_gpAp9EkC6aGZh2"
+
 export const SHeight = (percentage) => {
   return Math.round((percentage * Dimensions.get("screen").height) / 100);
 };

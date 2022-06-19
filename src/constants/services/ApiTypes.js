@@ -7,6 +7,7 @@ export const UrlTypes = {
   Login: apiConst.Login + "Authentication",
   ForgotPassword: apiConst.Login + "ForgotPassword",
   ResetPassword: apiConst.Login + "ResetPassword",
+  GetDashboard: apiConst.Dashboard + "DashboardItem",
   GetCourseType: apiConst.courseType + "GetAll",
   GetInstituteById: apiConst.courseTypeInstitutions + "GetByCourseTypeID",
   GetCourseByInstituteId: apiConst.course + "GetByCourseTypeInstitutionsID",
@@ -18,5 +19,8 @@ export const UrlTypes = {
   GetChapterBySubjectID: apiConst.chapter + "GetChapterBySubjectID",
   GetTopicByChapterID: apiConst.topic + "GetTopicByChapterID",
   GetVideoSessionByTopicID: apiConst.VideoSession + "GetVideoSessionByTopicID",
-  SkipForTrial:apiConst.Subscription+"SkipForTrial"
+  getPlanDetails: apiConst.courseFee + "GetCourseFee",
+  SkipForTrial: apiConst.Subscription + "SkipForTrial",
+  GetUserProfile: apiConst.Registration + "RegistrationDetails",
+  CreateOrder: apiConst.order + "CreateOrder",
 };

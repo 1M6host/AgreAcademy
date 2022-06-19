@@ -44,7 +44,7 @@ const HomeView = (props) => {
               justifyContent: "space-between",
               borderColor: Colors.lightgrey,
               paddingHorizontal: SWidth(3.5),
-              paddingVertical: SHeight(2),
+              height:SWidth(18),
               marginBottom: SHeight(1),
               elevation: 5,
               borderRadius: SWidth(1.5),
@@ -97,6 +97,7 @@ const HomeView = (props) => {
                     ? Colors.subscribedBgC
                     : Colors.red,
                   width: SWidth(25),
+                  height:SWidth(8),
                   borderRadius: SWidth(1.5),
                   alignItems: "center",
                   justifyContent: "center",

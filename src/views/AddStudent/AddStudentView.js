@@ -13,8 +13,6 @@ import { services } from "../../constants/services/services";
 import { Validate } from "../../constants/Validations";
 import ButtonView from "../../components/ButtonView";
 
-
-
 const dummyData = [
   {
     id: 0,
@@ -54,7 +52,7 @@ const AddStudentView = (props) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   useEffect(() => {
-    console.log("props.formData>>>>>>>>",props.formData);
+    console.log("props.formData>>>>>>>>", props.formData);
   });
 
   const getDropdownData = () => {
@@ -145,9 +143,7 @@ const AddStudentView = (props) => {
 
   const setDate = (event, date) => {
     date = date || this.state.date;
-    console.log(date);
     setShowDatePicker(false);
-
     props.onValueChange("dob", String(date));
   };
 
@@ -178,9 +174,13 @@ const AddStudentView = (props) => {
       return false;
     } else if (!Validate.checkEmpty("Date of Birth", props.formData?.dob)) {
       return false;
-    } else if (!Validate.checkNumber("Mobile Number", 10, props.formData?.mobile)) {
+    } else if (
+      !Validate.checkNumber("Mobile Number", 10, props.formData?.mobile)
+    ) {
       return false;
-    } else if (!Validate.checkEmpty("Course Type", props.formData?.courseType)) {
+    } else if (
+      !Validate.checkEmpty("Course Type", props.formData?.courseType)
+    ) {
       return false;
     } else if (!Validate.checkEmpty("Institute", props.formData?.institute)) {
       return false;
@@ -280,7 +280,11 @@ const AddStudentView = (props) => {
           maximumDate={
             new Date(new Date().setFullYear(new Date().getFullYear() - 5))
           }
-          value={props.formData["dob"] !== "" ? new Date(props.formData["dob"]) : new Date()}
+          value={
+            props.formData["dob"] !== ""
+              ? new Date(props.formData["dob"])
+              : new Date()
+          }
           onChange={setDate}
         />
       )}

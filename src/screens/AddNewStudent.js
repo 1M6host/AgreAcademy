@@ -134,9 +134,28 @@ export default AddNewStudent = () => {
     } else {
       valTemp = val;
     }
-    setForm(() => {
-      return { ...form, ...{ [key]: valTemp }, ...valNewCourseTemp };
-    });
+
+    if (key == "dob") {
+      const today = new Date().getFullYear();
+      const ageYear = new Date(valTemp).getFullYear();
+      let valAge = today - ageYear;
+      setForm(() => {
+        return {
+          ...form,
+          ...{ [key]: valTemp, age: String(valAge) },
+          ...valNewCourseTemp,
+        };
+      });
+    } else {
+      setForm(() => {
+        return {
+          ...form,
+          ...{ [key]: valTemp },
+          ...valNewCourseTemp,
+        };
+      });
+    }
+
     // setVal(val);
   };
 

@@ -187,7 +187,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   formInputStyle: {
-    height: SHeight(7),
+    height: SWidth(12),
     backgroundColor: Colors.white,
     elevation: 5,
     zIndex: 5,

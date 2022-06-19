@@ -24,10 +24,11 @@ const FormInputView = ({
   keyboardTypeProp,
   style,
   containerStyle,
+  editableProp,
 }) => {
   return (
     <View style={[styles.FormInputContainer, containerStyle]}>
-      {title &&(
+      {title && (
         <Text
           style={[
             {
@@ -75,6 +76,7 @@ const FormInputView = ({
         </TouchableOpacity>
       ) : (
         <TextInput
+          editable={editableProp}
           value={value}
           onChangeText={(text) => onChangeText(id, text)}
           maxLength={maxLengthProp || undefined}
@@ -82,7 +84,7 @@ const FormInputView = ({
           placeholderTextColor={Colors.lightgrey}
           placeholder={"Enter " + title}
           style={{
-            height: SHeight(7.5),
+            height: SWidth(12),
             paddingHorizontal: SWidth(2.5),
             backgroundColor: Colors.white,
             borderColor: Colors.listHeader,

@@ -13,7 +13,7 @@ const CheckBoxView = (props) => {
       onPress={() => setChecked(!checked)}
     >
       <Icon
-        name={checked ? "checkbox-marked-outline" : "checkbox-blank-outline"}
+        name={!checked ? "checkbox-marked-outline" : "checkbox-blank-outline"}
         size={24}
       />
       <Text style={[styles.text_normal_bold,{ paddingStart: SWidth(2.5) }]}>{props.title}</Text>

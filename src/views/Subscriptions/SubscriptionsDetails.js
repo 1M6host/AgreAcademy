@@ -24,8 +24,10 @@ const SubscriptionsDetails = (props) => {
           paddingBottom: SHeight(1.5),
         }}
       >
-        <Text style={[styles.text_normal_bold]}>Total : 3000</Text>
-        <Text style={[styles.text_normal_bold]}>15000</Text>
+        <Text style={[styles.text_normal_bold]}>Total :</Text>
+        <Text style={[styles.text_normal_bold]}>
+          {props?.feeData?.feeAmount}
+        </Text>
       </View>
       <View
         style={{
@@ -34,8 +36,10 @@ const SubscriptionsDetails = (props) => {
           paddingVertical: SHeight(1),
         }}
       >
-        <Text style={[styles.text_normal]}>Total Amount :</Text>
-        <Text style={[styles.text_normal]}>18000</Text>
+        <Text style={[styles.text_normal]}>Total Discount :</Text>
+        <Text style={[styles.text_normal]}>
+          {props?.feeData?.discountValue} %
+        </Text>
       </View>
       <View
         style={{
@@ -45,7 +49,41 @@ const SubscriptionsDetails = (props) => {
         }}
       >
         <Text style={[styles.text_normal]}>Discount :</Text>
-        <Text style={[styles.text_normal]}>3000</Text>
+        <Text style={[styles.text_normal]}>
+          {props?.feeData?.discountAmount}
+        </Text>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingVertical: SHeight(1),
+        }}
+      >
+        <Text style={[styles.text_normal]}>Fee With Discount :</Text>
+        <Text style={[styles.text_normal]}>
+          {props?.feeData?.feeAmountWithDiscount}
+        </Text>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingVertical: SHeight(1),
+        }}
+      >
+        <Text style={[styles.text_normal]}>Total TAX :</Text>
+        <Text style={[styles.text_normal]}>{props?.feeData?.taxValue}</Text>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingVertical: SHeight(1),
+        }}
+      >
+        <Text style={[styles.text_normal]}>TAX amount :</Text>
+        <Text style={[styles.text_normal]}>{props?.feeData?.taxAmount}</Text>
       </View>
       <View
         style={{
@@ -55,7 +93,9 @@ const SubscriptionsDetails = (props) => {
         }}
       >
         <Text style={[styles.text_normal]}>Payable Amount :</Text>
-        <Text style={[styles.text_normal]}>15000</Text>
+        <Text style={[styles.text_normal]}>
+          {props?.feeData?.netPayableAmount}
+        </Text>
       </View>
       <View
         style={{
@@ -67,16 +107,20 @@ const SubscriptionsDetails = (props) => {
       >
         <BlueButtonView
           onPressProp={() => {
-            props.onPayNow();
+            props.onPayNow(props?.feeData);
           }}
-          style={{ width: SWidth(35), backgroundColor: Colors.buttonGreen }}
+          style={{
+            width: SWidth(40),
+            height: 45,
+            backgroundColor: Colors.buttonGreen,
+          }}
           title={"Pay Now"}
         />
         <BlueButtonView
           onPressProp={() => {
             props.onPayLater();
           }}
-          style={{ width: SWidth(35), backgroundColor: Colors.red }}
+          style={{ width: SWidth(40), height: 45, backgroundColor: Colors.red }}
           title={"Skip for Trial"}
         />
       </View>
