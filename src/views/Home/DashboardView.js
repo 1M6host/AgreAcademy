@@ -7,6 +7,7 @@ import { iconSize, styles } from "../../constants/styles";
 import { SHeight, SWidth } from "../../constants/Utls";
 
 const DashboardView = (props) => {
+  const isDashboard = props.parentView == "dashboard";
   const [dashboard, setDashboard] = useState();
   useEffect(() => {
     !dashboard &&
@@ -20,6 +21,8 @@ const DashboardView = (props) => {
       <View
         style={{
           marginHorizontal: SWidth(1.25),
+          padding: SWidth(1.25),
+          marginTop: SWidth(1.5),
           width: SWidth(30),
           alignItems: "center",
         }}
@@ -48,8 +51,6 @@ const DashboardView = (props) => {
     );
   };
 
-  const isDashboard = props.parentView == "dashboard";
-
   return (
     <View style={[styles.container, { backgroundColor: Colors.white }]}>
       {isDashboard && (
@@ -74,7 +75,7 @@ const DashboardView = (props) => {
         }}
       >
         <FlatList
-          key={isDashboard ? "1" : "2"}
+          key={isDashboard ? "H" : "V"}
           contentContainerStyle={{
             paddingStart: SWidth(1.25),
           }}

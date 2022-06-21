@@ -42,13 +42,17 @@ export default Subscriptions = ({ navigation }) => {
     const formBody = {
       fk_SubscriptionTypeID: 0,
       fk_StudentID: data?.studentID,
-      fk_CourseTypeID: data?.fk_CourseID,
+      fk_CourseTypeID: data?.fk_CourseTypeID,
       fk_CourseTypeInstitutionsID: data?.fk_CourseTypeInstitutionsID,
-      fk_CourseID: data?.fk_CourseTypeID,
+      fk_CourseID: data?.fk_CourseID,
     };
     services.createOrder(formBody).then((res) => {
       console.log("createOrder res", res);
-      paymentGateway(res?.data);
+      if (res?.data?.netPayableAmount) {
+        paymentGateway(res?.data);
+      } else {
+        alert("Server Error");
+      }
     });
   };
 
@@ -58,7 +62,7 @@ export default Subscriptions = ({ navigation }) => {
       currency: "INR",
       // order_id: res?.data?.orderID,
       key: RZPKEY,
-      amount: String(dataObj?.netPayableAmount * 100),
+      amount: String(parseFloat(dataObj?.netPayableAmount).toFixed(2) * 100),
       name: route?.params?.studentObj?.name,
       prefill: {
         email: "",
@@ -76,7 +80,7 @@ export default Subscriptions = ({ navigation }) => {
           fk_OrderNumber: dataObj?.orderNumber,
           payableAmount: dataObj?.netPayableWithDiscount,
           paymentStatus: "Complete",
-          paymentMode: "RazorPay",
+          paymentMode: "Online payment",
         };
         updatePayment(formBody);
       })
