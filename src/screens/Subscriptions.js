@@ -91,8 +91,9 @@ export default Subscriptions = ({ navigation }) => {
   };
 
   const updatePayment = (formBody) => {
-    services.createOrder(formBody).then((res) => {
+    services.updateOrder(formBody).then((res) => {
       console.log("updatePayment res", res);
+      alert(res?.message);
       navigation.goBack();
     });
   };

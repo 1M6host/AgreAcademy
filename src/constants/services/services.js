@@ -56,4 +56,6 @@ export const services = {
     Api.get(UrlTypes.SkipForTrial + "?" + data, (response) => response),
   GetUserProfile: (data) =>
     Api.get(UrlTypes.GetUserProfile + "?" + data, (response) => response),
+  updateOrder: (data) =>
+    Api.post(UrlTypes.UpdateOrder, data, (response) => response),
 };

@@ -61,7 +61,9 @@ export default AddNewStudent = () => {
           await setData("UserObj", data);
           navigation.goBack();
         }
-        alert(res.message);
+        else{
+          alert(res.message);
+        }
       });
     } else {
       services.addNewStudent(tempForm).then(async (res) => {

@@ -16,6 +16,7 @@ export const apiConst = {
   Subscription: "Subscription/",
   profile: "profile/",
   order: "Order/",
+  payment:"Payment/"
 };
 // https://agreacademyapi-uat.azurewebsites.net/api/CourseFee/GetCourseFee?StudentId=152&CourseTypeId=1&CourseTypeInstitutionsId=21&CourseId=1
 // https://agreacademyapi-uat.azurewebsites.net/api/CourseFee​/GetCourseFee?StudentId=152&CourseTypeId=1&CourseTypeInstitutionsId=21&CourseId=1

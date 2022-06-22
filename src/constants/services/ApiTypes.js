@@ -23,4 +23,5 @@ export const UrlTypes = {
   SkipForTrial: apiConst.Subscription + "SkipForTrial",
   GetUserProfile: apiConst.Registration + "RegistrationDetails",
   CreateOrder: apiConst.order + "CreateOrder",
+  UpdateOrder: apiConst.payment + "SavePayment",
 };
