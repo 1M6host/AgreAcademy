@@ -13,10 +13,10 @@ const ProfileView = (props) => {
   useEffect(() => {
     const getUserData = async () => {
       const data = await getData("UserObj");
-      console.log(data);
+      console.log("getUserData>>",data);
       setUserData(data);
-      services.GetUserProfile(`ID=${data?.registrationID}`).then((res) => {
-        console.log(res);
+      services.GetUserProfile(`${data?.registrationID}`).then((res) => {
+        console.log("GetUserProfile??",res);
       });
     };
     !userData && getUserData();

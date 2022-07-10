@@ -12,7 +12,8 @@ const DashboardView = (props) => {
   useEffect(() => {
     !dashboard &&
       services.getDashboard().then((res) => {
-        setDashboard(res?.data);
+        console.log(res)
+        setDashboard(res?.data[0]);
       });
   });
 

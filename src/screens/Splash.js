@@ -11,7 +11,6 @@ export default Splash = () => {
 
   const onPressStart = async () => {
     const data = await getData("UserObj");
-    console.log(data);
     if (data) navigate.replace("HomeNav");
     else navigate.replace("LoginNav");
   };

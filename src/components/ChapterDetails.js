@@ -70,10 +70,10 @@ export default ChapterDetails = ({ navigation }) => {
   };
 
   const getTopicList = async (data) => {
-    services.getChapterDetails(`ChapterID=${data.chapterID}`).then((res) => {
+    services.getChapterDetails(`${data.chapterID}`).then((res) => {
       if (res.code == "200") {
-        if (res.dataList.length) {
-          setListData(res.dataList);
+        if (res.data.length) {
+          setListData(res.data);
         }
       } else {
         setListData([]);

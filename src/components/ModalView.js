@@ -21,7 +21,7 @@ const ModalView = (props) => {
         }}
         style={{ flex: 1, paddingVertical: SHeight(1.5), alignItems: "center" }}
       >
-        <Text>{item.name || item.title}</Text>
+        <Text>{item.name || item.title || item.institutionsName}</Text>
       </TouchableOpacity>
     );
   };

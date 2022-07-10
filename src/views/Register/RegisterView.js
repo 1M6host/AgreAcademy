@@ -9,9 +9,7 @@ import RegisterInputView from "./RegisterInputView";
 
 const RegisterView = (props) => {
   const onRegister = (body) => {
-    console.log(body);
     services.signUp(body).then((res) => {
-      console.log(res);
       if (res.code == "200") {
         props.onRegisterClick(body.mobileNumber);
       }

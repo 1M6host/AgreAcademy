@@ -32,34 +32,29 @@ export default AddStudent = () => {
   const [listData, setListData] = useState([]);
 
   const openChapterDetails = (item) => {
-    console.log("click");
     navigation.navigate("SubjectDetails", { studentData: item });
   };
 
   const getdata = async () => {
     const data = await getData("UserObj");
-    console.log(data);
-    if (listData.length === 0 && data?.registrationID) {
+    console.log(listData)
+    if (listData?.length === 0 && data?.registrationID) {
       getStudents(data);
     }
   };
 
   useEffect(() => {
-    console.log(isFocused);
     isFocused ? getdata() : setListData([]);
   }, [isFocused]);
 
   const getStudents = async (data) => {
-    services
-      .getStudents(`RegistrationID=` + data?.registrationID)
-      .then((res) => {
-        console.log(res);
-        if (res.code == "200") {
-          setListData(res.dataList);
-        } else {
-          setListData([]);
-        }
-      });
+    services.getStudents(data?.registrationID).then((res) => {
+      if (res.code == "200") {
+        setListData(res.data);
+      } else {
+        setListData([]);
+      }
+    });
   };
   return (
     <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>
@@ -68,7 +63,6 @@ export default AddStudent = () => {
       <HomeView
         listType={"student"} // detail, video
         navigateEdit={(item) => {
-          console.log(item);
           navigation.navigate("AddNewStudent", { editItem: item });
         }}
         onAddClick={() => {

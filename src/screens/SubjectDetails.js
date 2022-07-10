@@ -48,7 +48,6 @@ export default SubjectDetails = ({ navigation }) => {
   };
 
   useEffect(() => {
-    console.log(isFocused);
     !dropdownListData && isFocused && getdata();
   });
 
@@ -60,9 +59,9 @@ export default SubjectDetails = ({ navigation }) => {
   }, [selectedSubject]);
 
   const getSubjectDetails = async (data) => {
-    services.getSubjectDetails(`SubjectID=${data.subjectID}`).then((res) => {
+    services.getSubjectDetails(`${data.subjectID}`).then((res) => {
       if (res.code == "200") {
-        if (res.dataList.length) {
+        if (res.data.length) {
           // const result = res.dataList.reduce((accum, current) => {
           //   let subjectGrp = accum.find((x) => x.title === current.name);
           //   if (!subjectGrp) {
@@ -73,7 +72,7 @@ export default SubjectDetails = ({ navigation }) => {
           //   return accum;
           // }, []);
 
-          setListData(res.dataList);
+          setListData(res.data);
         }
       } else {
         setListData([]);
@@ -82,15 +81,16 @@ export default SubjectDetails = ({ navigation }) => {
   };
 
   const getSubjectList = async (data) => {
+    console.log("getSubjectList",data)
     services
       .getSubjectList(
-        `CourseTypeId=${data.courseTypeID}&CourseTypeInstitutionsID=${data.courseTypeInstitutionsID}&CourseID=${data.courseID}`
+        `${data.courseCategoryID}/${data.courseInstitutionsID}/${data.courseID}`
       )
       .then((res) => {
         if (res.code == "200") {
-          if (res.dataList.length) {
-            setSelectedSubject(res.dataList[0]);
-            setDropdownListData(res.dataList);
+          if (res.data.length) {
+            setSelectedSubject(res.data[0]);
+            setDropdownListData(res.data);
           }
         } else {
           setDropdownListData([]);
@@ -100,7 +100,6 @@ export default SubjectDetails = ({ navigation }) => {
   };
 
   const openDetails = (item) => {
-    console.log("openDetails", item);
     navigation.navigate("ChapterDetails", { subjectData: item });
   };
 

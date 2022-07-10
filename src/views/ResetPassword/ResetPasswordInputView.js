@@ -13,7 +13,6 @@ const ResetPasswordInputView = (props) => {
     const [confirmPasword, setConfirmPassword] = useState("")
 
     const onSubmit = () => {
-        console.log("confirm Pin");
         if (!Validate.checkOTP("PIN", password)) {
             return false
         }
@@ -24,7 +23,6 @@ const ResetPasswordInputView = (props) => {
             return false
         }
         else {
-            console.log("confirm Pin validated");
             props.onClick(`&PIN=${password}`)
         }
     }

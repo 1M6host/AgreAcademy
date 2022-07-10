@@ -17,7 +17,7 @@ export default Login = () => {
     }
 
     const onLogin = async(UserObj) => {
-        await setData("UserObj",UserObj)
+        await setData("UserObj",UserObj[0])
         navigate.replace("HomeNav")
     }
 

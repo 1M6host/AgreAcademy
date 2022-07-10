@@ -51,10 +51,6 @@ const AddStudentView = (props) => {
   const [courseData, setCourseData] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  useEffect(() => {
-    console.log("props.formData>>>>>>>>", props.formData);
-  });
-
   const getDropdownData = () => {
     if (dropDownKey == "gender") {
       return genderData;
@@ -99,8 +95,8 @@ const AddStudentView = (props) => {
   const onGetCourseType = async () => {
     return await services.getCourseType().then((res) => {
       if (res.code == "200") {
-        if (res.dataList.length !== 0) {
-          return res.dataList;
+        if (res.data.length !== 0) {
+          return res.data;
         }
         setDropDownKey("");
       }
@@ -109,10 +105,10 @@ const AddStudentView = (props) => {
   };
   const onGetInstituteById = async () => {
     return await services
-      .getInstituteById(`ID=${props.formData?.courseType?.courseTypeID}`)
+      .getInstituteById(`${props.formData?.courseType?.courseCategoryID}`)
       .then((res) => {
         if (res.code == "200") {
-          return res.dataList;
+          return res.data;
         }
         setDropDownKey("");
         alert(res.message);
@@ -121,11 +117,11 @@ const AddStudentView = (props) => {
   const onGetCourseByInstituteId = async () => {
     return await services
       .getCourseByInstituteId(
-        `CourseTypeID=${props.formData?.courseType?.courseTypeID}&ID=${props.formData?.institute?.courseTypeInstitutionsID}`
+        `${props.formData?.courseType?.courseCategoryID}/${props.formData?.institute?.institutionsID}`
       )
       .then((res) => {
         if (res.code == "200") {
-          return res.dataList;
+          return res.data;
         }
         setDropDownKey("");
         alert(res.message);
@@ -242,7 +238,7 @@ const AddStudentView = (props) => {
           id={"institute"}
           title={"Institute"}
           openDropDown={() => openDropDownClick("institute")}
-          value={props.formData["institute"].name}
+          value={props.formData["institute"].institutionsName}
         />
         <FormInputView
           isDropDown

@@ -192,7 +192,6 @@ const HomeView = (props) => {
       </>
     );
   };
-  console.log("props.listType>", props.listType);
   return (
     <View style={[styles.container, { backgroundColor: "#fff" }]}>
       {props.onAddClick && (

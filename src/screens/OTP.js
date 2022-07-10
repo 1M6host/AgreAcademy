@@ -10,16 +10,12 @@ export default OTP = () => {
     const navigate = useNavigation()
     const route = useRoute()
 
-    useEffect(() => {
-        console.log(route.params.mobile)
-    })
-
     const onOTPVerify = (otp) => {
 
         if (!Validate.checkOTP("OTP", otp)) {
             return false
         } else {
-            services.verifyOTP(`MobileNumber=${route.params.mobile}&OTP=${otp}`).then(res => {
+            services.verifyOTP(`${route.params.mobile}/${otp}`).then(res => {
                 if (res.code == "200") {
                     navigate.replace("PIN", { "mobile": route.params.mobile })
                 }

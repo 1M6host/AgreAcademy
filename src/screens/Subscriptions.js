@@ -23,37 +23,35 @@ export default Subscriptions = ({ navigation }) => {
   const route = useRoute();
   const [feeData, setFeeData] = useState();
   useEffect(() => {
-    const StudentData = route?.params?.studentObj;
+    const StudentData =
+      route?.params?.studentObj[0] || route?.params?.studentObj;
+    console.log("route?.params>>", route?.params);
     !feeData && getPlanDetails(StudentData);
   });
 
   const getPlanDetails = (StudentData) => {
     services
-      .getPlanDetails(
-        `StudentId=${StudentData?.studentID}&CourseTypeId=${StudentData?.courseTypeID}&CourseTypeInstitutionsId=${StudentData?.courseTypeInstitutionsID}&CourseId=${StudentData?.courseID}`
-      )
+      .getPlanDetails(`StudentId=${StudentData?.studentID}`)
       .then((res) => {
-        console.log("getPlanDetails res", res?.data);
-        setFeeData(res?.data);
+        setFeeData(res?.data[0]);
       });
   };
 
   const payNow = (data) => {
     const formBody = {
-      fk_SubscriptionTypeID: 0,
+      fk_SubscriptionTypeID: 2,
       fk_StudentID: data?.studentID,
-      fk_CourseTypeID: data?.fk_CourseTypeID,
-      fk_CourseTypeInstitutionsID: data?.fk_CourseTypeInstitutionsID,
-      fk_CourseID: data?.fk_CourseID,
     };
-    services.createOrder(formBody).then((res) => {
-      console.log("createOrder res", res);
-      if (res?.data?.netPayableAmount) {
-        paymentGateway(res?.data);
-      } else {
-        alert("Server Error");
-      }
-    });
+    services
+      .createOrder(`SubscriptionTypeId=${2}&StudentId=${data?.studentID}`)
+      .then((res) => {
+        console.log("createOrder res", res);
+        if (res?.data?.netPayableAmount) {
+          paymentGateway(res?.data);
+        } else {
+          alert("Server Error");
+        }
+      });
   };
 
   const paymentGateway = (dataObj) => {
@@ -63,16 +61,15 @@ export default Subscriptions = ({ navigation }) => {
       // order_id: res?.data?.orderID,
       key: RZPKEY,
       amount: String(parseFloat(dataObj?.netPayableAmount).toFixed(2) * 100),
-      name: route?.params?.studentObj?.name,
+      name: route?.params?.studentObj[0]?.name,
       prefill: {
         email: "",
-        contact: "91" + route?.params?.studentObj?.mobileNumber,
-        name: route?.params?.studentObj?.name,
+        contact: "91" + route?.params?.studentObj[0]?.mobileNumber,
+        name: route?.params?.studentObj[0]?.name,
       },
     };
     RazorpayCheckout.open(options)
       .then((data) => {
-        console.log(data);
         // handle success : ${data.razorpay_payment_id}
         alert(`Payment Successful!`);
         const formBody = {
@@ -100,9 +97,8 @@ export default Subscriptions = ({ navigation }) => {
 
   const skipForTrial = () => {
     services
-      .SkipForTrial(`StudentID=${route?.params?.studentObj?.studentID}`)
+      .SkipForTrial(`StudentID=${route?.params?.studentObj[0]?.studentID}`)
       .then((res) => {
-        console.log("StudentObj res", res);
         alert(res?.message);
         navigation.goBack();
       });

@@ -37,17 +37,18 @@ export default AddNewStudent = () => {
       gender: body?.gender.name === "Male" ? "M" : "F",
       dob: new Date(body?.dob),
       mobileNumber: body?.mobile,
-      fk_CourseTypeID: body?.courseType.courseTypeID,
-      fk_CourseTypeInstitutionsID: body?.institute.courseTypeInstitutionsID,
+      fk_CourseCategoryID: body?.courseType.courseCategoryID,
+      fk_CourseInstitutionsID: body?.institute.institutionsID,
       fk_CourseID: body?.course.courseID,
       createdBy: data?.name,
+      isActive: true,
+      isSubscribed: false,
     };
 
     // studentID: editDetails ? editDetails?.studentID : "0",
     if (editDetails) {
       tempForm["studentID"] = editDetails?.studentID;
       services.updateStudent(tempForm).then(async (res) => {
-        console.log("services.updateStudent>>>>>", res);
         if (res?.code == "200") {
           data = {
             ...data,
@@ -60,8 +61,7 @@ export default AddNewStudent = () => {
           };
           await setData("UserObj", data);
           navigation.goBack();
-        }
-        else{
+        } else {
           alert(res.message);
         }
       });

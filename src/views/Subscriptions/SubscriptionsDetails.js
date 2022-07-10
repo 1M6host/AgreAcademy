@@ -38,7 +38,7 @@ const SubscriptionsDetails = (props) => {
       >
         <Text style={[styles.text_normal]}>Total Discount :</Text>
         <Text style={[styles.text_normal]}>
-          {props?.feeData?.discountValue} %
+          {props?.feeData?.discountValue}%
         </Text>
       </View>
       <View

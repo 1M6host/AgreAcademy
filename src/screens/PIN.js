@@ -11,20 +11,15 @@ export default PIN = () => {
   const navigate = useNavigation();
   const route = useRoute();
 
-  useEffect(() => {
-    console.log(route.params.mobile);
-  });
-
   const onPINVerify = (pin) => {
     if (!Validate.checkOTP("PIN", pin)) {
       return false;
     } else {
       services
-        .setPIN(`MobileNumber=${route.params.mobile}&PIN=${pin}`)
+        .setPIN(`${route.params.mobile}/${pin}`)
         .then(async (res) => {
-          console.log(res);
           if (res.status == "Success") {
-            await setData("UserObj", res?.data);
+            await setData("UserObj", res?.data[0]);
             navigate.replace("HomeNav");
           }
           alert(res.message || res.errors);
