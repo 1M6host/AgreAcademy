@@ -43,15 +43,15 @@ export const services = {
       (response) => response
     ),
 
-  updateStudent: (data) =>
-    Api.post(UrlTypes.UpdateStudent, data, (response) => response),
+  updateStudent: (id, data) =>
+    Api.post(UrlTypes.UpdateStudent + "/" + id, data, (response) => response),
 
   getStudents: (data) =>
     Api.get(UrlTypes.GetStudent + "/" + data, (response) => response),
   getPlanDetails: (data) =>
     Api.get(UrlTypes.getPlanDetails + "?" + data, (response) => response),
   createOrder: (data) =>
-    Api.get(UrlTypes.CreateOrder+ "?" + data, (response) => response),
+    Api.get(UrlTypes.CreateOrder + "?" + data, (response) => response),
   SkipForTrial: (data) =>
     Api.get(UrlTypes.SkipForTrial + "?" + data, (response) => response),
   GetUserProfile: (data) =>

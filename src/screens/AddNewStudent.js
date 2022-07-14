@@ -37,9 +37,9 @@ export default AddNewStudent = () => {
       gender: body?.gender.name === "Male" ? "M" : "F",
       dob: new Date(body?.dob),
       mobileNumber: body?.mobile,
-      fk_CourseCategoryID: body?.courseType.courseCategoryID,
-      fk_CourseInstitutionsID: body?.institute.institutionsID,
-      fk_CourseID: body?.course.courseID,
+      fk_CourseCategoryID: body?.courseType?.courseCategoryID,
+      fk_CourseInstitutionsID: body?.institute?.courseInstitutionsID,
+      fk_CourseID: body?.course?.courseID,
       createdBy: data?.name,
       isActive: true,
       isSubscribed: false,
@@ -47,33 +47,34 @@ export default AddNewStudent = () => {
 
     // studentID: editDetails ? editDetails?.studentID : "0",
     if (editDetails) {
-      tempForm["studentID"] = editDetails?.studentID;
-      services.updateStudent(tempForm).then(async (res) => {
-        if (res?.code == "200") {
-          data = {
-            ...data,
-            ...{
-              fk_CourseTypeID: body.courseType.courseTypeID,
-              fk_CourseTypeInstitutionsID:
-                body.institute.courseTypeInstitutionsID,
-              fk_CourseID: body.course.courseID,
-            },
-          };
-          await setData("UserObj", data);
-          navigation.goBack();
-        } else {
-          alert(res.message);
-        }
-      });
+      // tempForm["studentID"] = editDetails?.studentID;
+      services
+        .updateStudent(editDetails?.studentID, tempForm)
+        .then(async (res) => {
+          if (res?.code == "200") {
+            data = {
+              ...data,
+              ...{
+                fk_CourseTypeID: body.courseType.courseTypeID,
+                fk_CourseTypeInstitutionsID:
+                  body.institute.courseTypeInstitutionsID,
+                fk_CourseID: body.course.courseID,
+              },
+            };
+            await setData("UserObj", data);
+            navigation.goBack();
+          } else {
+            alert(res.message);
+          }
+        });
     } else {
       services.addNewStudent(tempForm).then(async (res) => {
         if (res?.code == "200") {
           data = {
             ...data,
             ...{
-              fk_CourseTypeID: body.courseType.courseTypeID,
-              fk_CourseTypeInstitutionsID:
-                body.institute.courseTypeInstitutionsID,
+              fk_CourseTypeID: body.courseType.courseCategoryID,
+              fk_CourseTypeInstitutionsID: body.institute.courseInstitutionsID,
               fk_CourseID: body.course.courseID,
             },
           };
@@ -87,6 +88,7 @@ export default AddNewStudent = () => {
 
   useEffect(() => {
     if (editDetails) {
+      console.log(editDetails);
       let tempForm = {
         name: editDetails?.name,
         age: String(editDetails?.age),
@@ -94,12 +96,12 @@ export default AddNewStudent = () => {
         dob: editDetails?.dob,
         mobile: editDetails?.mobileNumber,
         courseType: {
-          courseTypeID: editDetails?.courseTypeID,
-          name: editDetails?.courseTypeName,
+          courseCategoryID: editDetails?.courseCategoryID,
+          name: editDetails?.courseCategoryName,
         },
         institute: {
-          courseTypeInstitutionsID: editDetails?.courseTypeInstitutionsID,
-          name: editDetails?.courseTypeInstitutionsName,
+          courseInstitutionsID: editDetails?.courseInstitutionsID,
+          institutionsName: editDetails?.courseInstitutionsName,
         },
         course: {
           courseTypeID: editDetails?.courseID,

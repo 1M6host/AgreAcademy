@@ -50,6 +50,10 @@ const AddStudentView = (props) => {
   const [instituteData, setInstituteData] = useState([]);
   const [courseData, setCourseData] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  
+  useEffect(() => {
+    console.log("props.formData>>>>>>>>", props.formData);
+  });
 
   const getDropdownData = () => {
     if (dropDownKey == "gender") {
@@ -117,7 +121,7 @@ const AddStudentView = (props) => {
   const onGetCourseByInstituteId = async () => {
     return await services
       .getCourseByInstituteId(
-        `${props.formData?.courseType?.courseCategoryID}/${props.formData?.institute?.institutionsID}`
+        `${props.formData?.courseType?.courseCategoryID}/${props.formData?.institute?.courseInstitutionsID}`
       )
       .then((res) => {
         if (res.code == "200") {

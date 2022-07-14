@@ -13,7 +13,7 @@ export const UrlTypes = {
   GetCourseByInstituteId: apiConst.course + "GetByID",
   GetStudent: apiConst.student + "GetAllStudent",
   AddNewStudent: apiConst.student + "Save",
-  UpdateStudent: apiConst.student + "UpdateStudent",
+  UpdateStudent: apiConst.student + "Update",
   GetSubjectByCourseAndInstitutionsID: apiConst.subject + "GetByID",
   GetChapterBySubjectID: apiConst.chapter + "GetBySubjectId",
   GetTopicByChapterID: apiConst.topic + "GetByChapterId",

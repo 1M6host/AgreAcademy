@@ -30,7 +30,7 @@ export default WatchVideo = ({ navigation }) => {
             paddingVertical: SHeight(2),
           }}
         >
-          <View>
+          <View maxWidth={SWidth(45)}>
             <Text numberOfLines={2} style={[styles.text_normal_bold, {}]}>
               Subject: {data?.subjectName}
             </Text>
@@ -41,7 +41,7 @@ export default WatchVideo = ({ navigation }) => {
               {data?.chapterName}
             </Text>
           </View>
-          <View>
+          <View maxWidth={SWidth(45)}>
             <Text
               numberOfLines={2}
               style={[styles.text_normal_bold, { maxWidth: SWidth(35) }]}

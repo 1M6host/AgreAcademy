@@ -37,17 +37,19 @@ export default Subscriptions = ({ navigation }) => {
       });
   };
 
-  const payNow = (data) => {
-    const formBody = {
-      fk_SubscriptionTypeID: 2,
-      fk_StudentID: data?.studentID,
-    };
+  const createOrderAPI = (data, type) => {
     services
-      .createOrder(`SubscriptionTypeId=${2}&StudentId=${data?.studentID}`)
+      .createOrder(`SubscriptionTypeId=${type}&StudentId=${data?.studentID}`)
       .then((res) => {
         console.log("createOrder res", res);
-        if (res?.data?.netPayableAmount) {
-          paymentGateway(res?.data);
+        if (res?.code == "200") {
+          if (type == 1) {
+            paymentGateway(res?.data[0]);
+          }
+          if (type == 2) {
+            alert("Trial opted!");
+            navigation.goBack();
+          }
         } else {
           alert("Server Error");
         }
@@ -75,15 +77,17 @@ export default Subscriptions = ({ navigation }) => {
         const formBody = {
           fk_StudentID: dataObj?.fk_StudentID,
           fk_OrderNumber: dataObj?.orderNumber,
-          payableAmount: dataObj?.netPayableWithDiscount,
+          payableAmount: dataObj?.netPayableAmount,
           paymentStatus: "Complete",
           paymentMode: "Online payment",
+          razorPayPaymentId: data.razorpay_payment_id,
         };
         updatePayment(formBody);
       })
       .catch((error) => {
         // handle failure
-        alert(`Error: ${error.code} | ${error.description}`);
+        const errorMsg = JSON.parse(error?.description);
+        alert(errorMsg.error.description);
       });
   };
 
@@ -118,11 +122,11 @@ export default Subscriptions = ({ navigation }) => {
         {feeData && (
           <SubscriptionsDetails
             feeData={feeData}
-            onPayLater={() => {
-              skipForTrial();
-            }}
             onPayNow={(data) => {
-              payNow(data);
+              createOrderAPI(data, 1);
+            }}
+            onPayLater={(data) => {
+              createOrderAPI(data, 2);
             }}
           />
         )}

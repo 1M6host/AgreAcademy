@@ -118,7 +118,7 @@ const SubscriptionsDetails = (props) => {
         />
         <BlueButtonView
           onPressProp={() => {
-            props.onPayLater();
+            props.onPayLater(props?.feeData);
           }}
           style={{ width: SWidth(40), height: 45, backgroundColor: Colors.red }}
           title={"Skip for Trial"}

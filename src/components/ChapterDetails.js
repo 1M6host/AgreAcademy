@@ -87,7 +87,7 @@ export default ChapterDetails = ({ navigation }) => {
       .getTopicDetails(`TopicId=${item?.topicID}`)
       .then((res) => {
         if (res.code == "200") {
-          setDropdownListData(res.dataList);
+          setDropdownListData(res.data);
           openDropDownClick();
         } else {
           setDropdownListData([]);
