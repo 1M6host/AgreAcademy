@@ -1,5 +1,14 @@
+import { useIsFocused } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, ScrollView, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  ImageBackground,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Colors } from "../../constants/Colors";
 import { services } from "../../constants/services/services";
@@ -9,26 +18,35 @@ import { SHeight, SWidth } from "../../constants/Utls";
 const DashboardView = (props) => {
   const isDashboard = props.parentView == "dashboard";
   const [dashboard, setDashboard] = useState();
+  const isFocused = useIsFocused();
+
   useEffect(() => {
-    !dashboard &&
-      services.getDashboard().then((res) => {
-        console.log(res)
-        setDashboard(res?.data[0]);
-      });
+    if (isFocused) {
+      !dashboard &&
+        services.getDashboard().then((res) => {
+          setDashboard(res?.data[0]);
+        });
+    } else {
+      setDashboard();
+    }
   });
 
   const renderItemComponent = ({ item, index }) => {
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => props.onVideoPlay(item)}
         style={{
           marginHorizontal: SWidth(1.25),
           padding: SWidth(1.25),
+          paddingTop: SWidth(1),
           marginTop: SWidth(1.5),
           width: SWidth(30),
           alignItems: "center",
         }}
       >
-        <View
+        <ImageBackground
+          source={{ uri: item?.videoThumbnail }}
+          resizeMode={"stretch"}
           style={{
             height: SWidth(25),
             aspectRatio: 1,
@@ -46,31 +64,32 @@ const DashboardView = (props) => {
           >
             <Icon name="play" size={iconSize + 10} />
           </View>
-        </View>
+        </ImageBackground>
         <Text numberOfLines={2}>{item.title}</Text>
-      </View>
+      </TouchableOpacity>
     );
   };
 
   return (
     <View style={[styles.container, { backgroundColor: Colors.white }]}>
       {isDashboard && (
-        <View style={{ flex: 2, alignSelf: "center" }}>
+        <View style={{ height: SHeight(55), alignSelf: "center" }}>
           <Image
             source={{
               uri: dashboard?.noticeBoardImageUrl,
             }}
             style={{
-              height: SHeight(50),
-              width: SWidth(80),
-              resizeMode: "contain",
+              flex:1,  
+              width: SWidth(90),
+              resizeMode: "stretch",
             }}
           />
         </View>
       )}
       <View
         style={{
-          flex: 1,
+          position: 'absolute',
+          bottom:0,
           alignItems: isDashboard ? "center" : "flex-start",
           flexDirection: "row",
         }}

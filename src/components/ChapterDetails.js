@@ -83,16 +83,14 @@ export default ChapterDetails = ({ navigation }) => {
 
   const onPlay = (item) => {
     console.log("onPlay", item);
-    services
-      .getTopicDetails(`TopicId=${item?.topicID}`)
-      .then((res) => {
-        if (res.code == "200") {
-          setDropdownListData(res.data);
-          openDropDownClick();
-        } else {
-          setDropdownListData([]);
-        }
-      });
+    services.getTopicDetails(`TopicId=${item?.topicID}`).then((res) => {
+      if (res.code == "200") {
+        setDropdownListData(res.data);
+        openDropDownClick();
+      } else {
+        setDropdownListData([]);
+      }
+    });
     // navigation.navigate("WatchVideo", { topic: item });
     // Linking.openURL(
     //   " https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"
@@ -100,8 +98,7 @@ export default ChapterDetails = ({ navigation }) => {
   };
 
   const openTopic = (topic) => {
-    console.log(topic);
-	navigation.navigate("WatchVideo", { topic: topic });
+    navigation.navigate("WatchVideo", { topic: topic });
   };
 
   return (

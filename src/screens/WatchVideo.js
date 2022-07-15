@@ -15,6 +15,7 @@ export default WatchVideo = ({ navigation }) => {
 
   useEffect(() => {
     if (!data && route?.params?.topic) {
+      console.log(route?.params?.topic)
       setData(route?.params?.topic);
     }
   });

@@ -7,13 +7,15 @@ import { images } from "../constants/images";
 import { styles } from "../constants/styles";
 import DashboardView from "../views/Home/DashboardView";
 
-export default Videos = () => {
-  const navigation = useNavigation();
-
+export default Videos = ({ navigation }) => {
+  const openTopic = (topic) => {
+    console.log(topic);
+    navigation.navigate("WatchVideo", { topic: topic });
+  };
   return (
     <ImageBackground source={images.splashBackground} style={{ flex: 1 }}>
       <Header title={"Videos"} />
-      <DashboardView />
+      <DashboardView onVideoPlay={(item) => openTopic(item)} />
     </ImageBackground>
   );
 };
