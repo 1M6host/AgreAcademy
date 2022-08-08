@@ -73,7 +73,7 @@ const DashboardView = (props) => {
   return (
     <View style={[styles.container, { backgroundColor: Colors.white }]}>
       {isDashboard && (
-        <View style={{ height: SHeight(55), alignSelf: "center" }}>
+        <View style={{ flex:1,alignItems:"center"}}>
           <Image
             source={{
               uri: dashboard?.noticeBoardImageUrl,
@@ -88,10 +88,9 @@ const DashboardView = (props) => {
       )}
       <View
         style={{
-          position: 'absolute',
-          bottom:0,
           alignItems: isDashboard ? "center" : "flex-start",
           flexDirection: "row",
+          // backgroundColor:"red"
         }}
       >
         <FlatList

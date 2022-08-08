@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import BlueButtonView from "../components/BlueButtonView";
 import FormInputView from "../components/FormInputView";
 import TextView from "../components/TextView";
@@ -13,10 +13,10 @@ const ProfileView = (props) => {
   useEffect(() => {
     const getUserData = async () => {
       const data = await getData("UserObj");
-      console.log("getUserData>>",data);
+      console.log("getUserData>>", data);
       setUserData(data);
       services.GetUserProfile(`${data?.registrationID}`).then((res) => {
-        console.log("GetUserProfile??",res);
+        console.log("GetUserProfile??", res);
       });
     };
     !userData && getUserData();
@@ -47,6 +47,20 @@ const ProfileView = (props) => {
         check={userData?.isParents}
         setCheck={() => {}}
       />
+      <View style={{ flex: 1,alignItems:'center',marginBottom:SHeight(10) }}>
+        <Image
+          source={{
+            uri: `https://agreacademystorages.blob.core.windows.net/uploaded-files/Banner1.jpg`,
+          }}
+          style={{ flex: 1,resizeMode:'stretch',width:SWidth(90),marginVertical:SHeight(1.5) }}
+        />
+        <Image
+          source={{
+            uri: `https://agreacademystorages.blob.core.windows.net/uploaded-files/Banner1.jpg`,
+          }}
+          style={{ flex: 1,resizeMode:'stretch',width:SWidth(90) }}
+        />
+      </View>
       <View
         style={{
           position: "absolute",

@@ -50,7 +50,7 @@ const AddStudentView = (props) => {
   const [instituteData, setInstituteData] = useState([]);
   const [courseData, setCourseData] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  
+
   useEffect(() => {
     console.log("props.formData>>>>>>>>", props.formData);
   });
@@ -192,7 +192,7 @@ const AddStudentView = (props) => {
 
   return (
     <>
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ paddingBottom: SHeight(10) }}>
         <FormInputView
           id={"name"}
           title={"Name"}
@@ -251,19 +251,23 @@ const AddStudentView = (props) => {
           openDropDown={() => openDropDownClick("course")}
           value={props.formData["course"].name}
         />
-        <View
-          style={{
-            alignItems: "center",
-            padding: SWidth(2.5),
-          }}
-        >
-          <ButtonView
-            onPressProp={() => validateInput()}
-            title={"Save"}
-            style={{ width: SWidth(80), height: 45 }}
-          />
-        </View>
       </ScrollView>
+      <View
+        style={{
+          position: "absolute",
+          bottom: SHeight(2.5),
+          left: 0,
+          right: 0,
+          alignItems: "center",
+        }}
+      >
+        <ButtonView
+          onPressProp={() => validateInput()}
+          title={"Save"}
+          style={{ width: SWidth(80), height: 45 }}
+        />
+      </View>
+
       <ModalView
         itemKey={dropDownKey}
         dropDownList={getDropdownData()}
